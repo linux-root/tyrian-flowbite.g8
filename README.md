@@ -13,7 +13,11 @@ Welcome to the Scala.js Project Template! This template sets up a Scala.js proje
 - **Tailwind CSS**: Benefit from Tailwind CSS for custom styling and design.
 
 ## Getting Started
-Follow these steps to get your Scala.js project up and running with Tyrian and Flowbite.
+
+```bash
+sbt new linux-root/tyrian-flowbite.g8
+
+```
 
 ### Prerequisites
 

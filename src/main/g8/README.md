@@ -9,8 +9,13 @@ Follow these steps to get your Scala.js project up and running with Tyrian and F
 
 ```bash
 
-sbt new linux-root/tyrian-flowbite.g8
+sbt watch
 
+
+```
+
+```bash
+sbt dev
 ```
 
 ### Prerequisites
