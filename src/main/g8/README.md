@@ -1,12 +1,10 @@
-A [Giter8][g8] Frontend template project for [Tyrian Framework](https://tyrian.indigoengine.io/) integrated with [Flowbite](flowbite.com)
 # Scala.js Project Template with Tyrian and Flowbite
 
-Welcome to the Scala.js Project Template! This template sets up a Scala.js project using the Tyrian framework and Flowbite for UI components. Tyrian is a powerful, type-safe framework for building web applications with Scala.js, and Flowbite is a Tailwind CSS component library that provides beautiful and customizable UI elements.
-
+Welcome to the Scala.js Project Template! This template sets up a Scala.js project using the [Tyrian](https://tyrian.indigoengine.io/) and Flowbite for UI components. Tyrian is a powerful, type-safe framework for building web applications with Scala.js, and Flowbite is a Tailwind CSS component library that provides beautiful and customizable UI elements.
 
 ## Getting Started
-Follow these steps to get your Scala.js project up and running with Tyrian and Flowbite.
 
+- Watch and compile Scala code upon changes
 ```bash
 
 sbt watch
@@ -14,6 +12,7 @@ sbt watch
 
 ```
 
+- Start Webpack dev server on port `9876`
 ```bash
 sbt dev
 ```
