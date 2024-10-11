@@ -5,13 +5,21 @@ Welcome to the Scala.js Project Template! This template sets up a Scala.js proje
 
 ![Tyrian Flowbite](./docs/sc.jpeg)
 
+---
+
 ## Features
 
-- **Scala.js Integration**: Leverage Scala.js to write your frontend code in Scala.
-- **Tyrian Framework**: Build type-safe and reactive web applications with Tyrian.
-- **Flowbite Components**: Utilize Flowbite's ready-to-use UI components for a modern look and feel.
-- **Tailwind CSS**: Benefit from Tailwind CSS for custom styling and design.
+- **Scala.js Integration**: Seamlessly leverage Scala.js to build highly performant web applications in Scala, allowing you to write type-safe code that compiles to JavaScript.
+  
+- **Tyrian Framework**: Utilize the power of the Tyrian framework for building robust and reactive front-end web applications in Scala, simplifying state management and UI rendering.
 
+- **Flowbite Components**: Enhance your user interface with Flowbite's pre-designed, responsive, and customizable components, providing a modern and polished look out of the box.
+
+- **Tailwind CSS**: Style your application effortlessly with Tailwind CSS, a highly customizable utility-first CSS framework that enables rapid development of custom designs.
+
+- **Docker Deployment**: The project includes ready-to-use Docker configurations for production deployment, ensuring consistency across environments and simplifying the deployment process.
+
+---
 ## Getting Started
 
 ```bash

@@ -12,15 +12,23 @@ sbt watch
 
 ```
 
-- Start Webpack dev server on port `9876`
+- Start Webpack dev server on  `http://localhost:9876`
 ```bash
 sbt dev
 ```
 
-### Prerequisites
+- Publish docker image Locally
+```bash
 
-- [Java JDK](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html) (11 or higher)
-- [sbt](https://www.scala-sbt.org/download.html) (Scala Build Tool)
+sbt dpl
+
+
+- Show all useful commands : 
+```bash
+
+sbt sbt
+
+```
 
 Template license
 ----------------
@@ -30,5 +38,4 @@ Written in 2024 by Watson Dinh <mr.kurro@gmail.com>
 To the extent possible under law, the author(s) have dedicated all copyright and related
 and neighboring rights to this template to the public domain worldwide.
 This template is distributed without any warranty. See <https://creativecommons.org/publicdomain/zero/1.0/>.
-
 [g8]: https://www.foundweekends.org/giter8/
