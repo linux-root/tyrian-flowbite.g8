@@ -43,7 +43,7 @@ webpackDevServer := {
   if (Files.exists(nodeModulesPath) && Files.isDirectory(nodeModulesPath)) {
     "npm run dev".!
   } else {
-    println(s"\${scala.Console.YELLOW}folder node_modules doesn't exist, installing npm packages\${scala.Console.RESET}")
+    println(s"\${scala.Console.YELLOW}Folder node_modules doesn't exist, installing npm packages...\${scala.Console.RESET}")
     "npm install".!
     "npm run dev".!
   }
