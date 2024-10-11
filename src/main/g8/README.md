@@ -4,17 +4,17 @@ Welcome to the Scala.js Project Template! This template sets up a Scala.js proje
 
 ## Getting Started
 
-- Watch and compile Scala code upon changes
+1. Watch and compile Scala code upon changes :
 ```bash
 sbt watch
 ```
 
-- Start Webpack dev server on  `http://localhost:9876`
+2. Start Webpack dev server on  `http://localhost:9876` (Make sure the step 1. is done before executing this command) :
 ```bash
 sbt dev
 ```
 
-- Publish docker image Locally
+- Publish docker image Locally :
 ```bash
 sbt dpl
 ```
