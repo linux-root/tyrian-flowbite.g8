@@ -16,12 +16,13 @@ sbt dev
 
 - Publish docker image Locally :
 ```bash
+# Nginx server serving your SPA will be listening on port 80
 sbt dpl
 ```
 
 - Show all useful commands : 
 ```bash
-sbt sbt
+sbt
 ```
 
 Template license
