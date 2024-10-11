@@ -16,7 +16,8 @@ sbt dev
 
 - Publish docker image Locally :
 ```bash
-# Nginx server serving your SPA will be listening on port 80
+# Nginx server serving your SPA inside docker container will be listening on port 80
+# To run docker container: docker run -p 8080:80 .....
 sbt dpl
 ```
 
