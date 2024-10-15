@@ -20,7 +20,6 @@ lazy val root = (project in file("."))
     Compile / fastOptJS / scalaJSLinkerConfig ~= { _.withSourceMap(false) },
     Compile / fullOptJS / scalaJSLinkerConfig ~= { _.withSourceMap(false) },
     libraryDependencies ++= Seq(
-      "io.indigoengine"            %%% "tyrian-io"                 % Dependencies.Tyrian,
       "io.indigoengine"            %%% "tyrian-zio"                % Dependencies.Tyrian,
       "dev.zio"                    %%% "zio-interop-cats"          % Dependencies.ZioInteropCats,
       "org.http4s"                 %%% "http4s-dom"                % Dependencies.Http4sDom,
