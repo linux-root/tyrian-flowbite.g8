@@ -27,7 +27,7 @@ logo :=
      |""".stripMargin
 
 usefulTasks := Seq(
-  UsefulTask("~fastOptJS", "Auto re-compile when source code changes detected").alias("watch"),
+  UsefulTask("~fastLinkJS", "Auto re-compile when source code changes detected").alias("watch"),
   UsefulTask("webpackDevServer", s"Start Webpack dev server").alias("dev"),
   UsefulTask("Docker/publishLocal", "Publish locally web app as a docker image").alias("dpl"),
   UsefulTask("Docker/publish", "Publish web app as a docker image to remote container registry").alias("dp"),
