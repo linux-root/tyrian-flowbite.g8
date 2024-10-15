@@ -29,8 +29,8 @@ lazy val root = (project in file("."))
   )
   .settings(
     dockerBaseImage       := "nginx:alpine",
-    Docker / publish      := (Docker / publish).dependsOn(Compile / fullOptJS).value,
-    Docker / publishLocal := (Docker / publishLocal).dependsOn(Compile / fullOptJS).value,
+    Docker / publish      := (Docker / publish).dependsOn(Compile / fullLinkJS).value,
+    Docker / publishLocal := (Docker / publishLocal).dependsOn(Compile / fullLinkJS).value,
     dockerExposedPorts    := Seq(80),
     dockerRepository      := Some(DockerSettings.repository),
     DockerSettings.x86ArchSetting,
