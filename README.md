@@ -25,6 +25,12 @@ Welcome to the Scala.js Project Template! This template sets up a Scala.js proje
 ```bash
 sbt new linux-root/tyrian-flowbite.g8
 
+# OR
+g8 linux-root/tyrian-flowbite.g8
+
+# OR
+mill -i init linux-root/tyrian-flowbite.g8
+
 ```
 
 ### Prerequisites
