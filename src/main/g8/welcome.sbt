@@ -36,15 +36,18 @@ usefulTasks := Seq(
 
 logoColor := scala.Console.MAGENTA
 
-lazy val webpackDevServer = taskKey[Unit](s"Start dev server")
+lazy val webpackDevServer = taskKey[Unit](s"Start dev server. Should be oppened in a separated terminal")
 
 webpackDevServer := {
-  val nodeModulesPath = Paths.get("node_modules")
-  if (Files.exists(nodeModulesPath) && Files.isDirectory(nodeModulesPath)) {
+  val compiledScalajsFile = Paths.get(s"target/scala-\${scalaVersion.value}/tyrian-flowbite-fastopt/main.js")
+  println(compiledScalajsFile)
+  if (Files.exists(compiledScalajsFile)) {
+    println(s"\n\${scala.Console.GREEN}Installing npm packages...\${scala.Console.RESET}")
+    "npm install".!
+    println(s"\n\${scala.Console.GREEN}Spawning up Dev server...")
+    println(s"\n\${scala.Console.GREEN}It will be available soon on : \${scala.Console.YELLOW}http://localhost:9876 \${scala.Console.RESET}")
     "npm run dev".!
   } else {
-    println(s"\${scala.Console.YELLOW}Folder node_modules doesn't exist, installing npm packages...\${scala.Console.RESET}")
-    "npm install".!
-    "npm run dev".!
+    println(s"\n\${scala.Console.RED}Please run watch command first. Then run dev command in a separated terminal\n\${scala.Console.RESET}")
   }
 }
