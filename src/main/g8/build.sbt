@@ -1,4 +1,5 @@
 import sbt.io.Path.relativeTo
+import scala.Console._
 import com.typesafe.sbt.packager.docker.{Cmd, ExecCmd}
 import sbt._
 import Keys._
@@ -7,7 +8,7 @@ lazy val autoImportSettings = Seq(
   scalacOptions += "-Yimports:zio,scala,scala.Predef"
 )
 
-ThisBuild / organization := "$organization$"
+ThisBuild / organization := "com.example"
 
 lazy val root = (project in file("."))
   .enablePlugins(ScalaJSPlugin, DockerPlugin)
@@ -28,7 +29,7 @@ lazy val root = (project in file("."))
     )
   )
   .settings(
-    dockerBaseImage       := "nginx:alpine",
+    dockerBaseImage       := "nginx:stable-perl",
     Docker / publish      := (Docker / publish).dependsOn(Compile / fullLinkJS).value,
     Docker / publishLocal := (Docker / publishLocal).dependsOn(Compile / fullLinkJS).value,
     dockerExposedPorts    := Seq(80),
@@ -43,7 +44,7 @@ lazy val root = (project in file("."))
     } ++ Seq(Cmd("COPY", "nginx.conf", "/etc/nginx/nginx.conf"), Cmd("CMD", """["nginx", "-g", "daemon off;"]""")),
     Docker / mappings ++= {
       import sys.process._
-      println("\n\nWebpack bundling...")
+      println(s"\n\n\$GREEN Webpack bundling...\$RESET\n\n")
       val result          = "npm run build:prod".!
       val frontendDist    = baseDirectory.value / "dist"
       val nginxConfigFile = baseDirectory.value / "nginx.conf"

@@ -3,6 +3,7 @@ import sbtwelcome._
 import scala.sys.process._
 import scala.collection.compat.immutable.LazyList
 import sys.env
+import scala.Console._
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
 import java.nio.file.{Files, Paths}
@@ -22,7 +23,7 @@ logo :=
      |  
      |Version : \${version.value}
      |
-     |\${scala.Console.YELLOW}Scala \${scalaVersion.value}\${scala.Console.RESET}
+     |\$YELLOW Scala \${scalaVersion.value}\$RESET
      | 
      |""".stripMargin
 
@@ -34,20 +35,20 @@ usefulTasks := Seq(
   UsefulTask("welcome", "Menu").alias("h")
 )
 
-logoColor := scala.Console.MAGENTA
+logoColor := MAGENTA
 
-lazy val webpackDevServer = taskKey[Unit](s"Start dev server. Should be oppened in a separated terminal")
+lazy val webpackDevServer = taskKey[Unit]("Start dev server. Should be oppened in a separated terminal")
 
 webpackDevServer := {
   val compiledScalajsFile = Paths.get(s"target/scala-\${scalaVersion.value}/tyrian-flowbite-fastopt/main.js")
   println(compiledScalajsFile)
   if (Files.exists(compiledScalajsFile)) {
-    println(s"\n\${scala.Console.GREEN}Installing npm packages...\${scala.Console.RESET}")
+    println(s"\n\$GREEN Installing npm packages...\$RESET")
     "npm install".!
-    println(s"\n\${scala.Console.GREEN}Spawning up Dev server...")
-    println(s"\n\${scala.Console.GREEN}It will be available shortly on : \${scala.Console.YELLOW}http://localhost:9876 \${scala.Console.RESET}")
+    println(s"\n\$GREEN Spawning up Dev server...")
+    println(s"\n\n\nServer will be available shortly on : \$YELLOW http://localhost:9876 \$RESET\n\n\n")
     "npm run dev".!
   } else {
-    println(s"\n\${scala.Console.RED}Please run watch command first. Then run dev command in a separated terminal\n\${scala.Console.RESET}")
+    println(s"\n\$RED Please run watch command first. Then run dev command in a separated terminal\n\$RESET")
   }
 }
