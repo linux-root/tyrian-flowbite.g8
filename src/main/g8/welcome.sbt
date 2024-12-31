@@ -40,7 +40,7 @@ logoColor := MAGENTA
 lazy val webpackDevServer = taskKey[Unit]("Start dev server. Should be oppened in a separated terminal")
 
 webpackDevServer := {
-  val compiledScalajsFile = Paths.get(s"target/scala-\${scalaVersion.value}/tyrian-flowbite-fastopt/main.js")
+  val compiledScalajsFile = Paths.get(s"target/scala-\${scalaVersion.value}/$name$-fastopt/main.js")
   println(compiledScalajsFile)
   if (Files.exists(compiledScalajsFile)) {
     println(s"\n\$GREEN Installing npm packages...\$RESET")

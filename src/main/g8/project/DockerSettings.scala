@@ -2,7 +2,7 @@ import com.typesafe.sbt.SbtNativePackager.Docker
 import com.typesafe.sbt.packager.Keys.{dockerBuildCommand, dockerExecCommand, dockerBuildOptions}
 
 object DockerSettings {
-  lazy val repository = s"myrepository"
+  lazy val repository = "$docker_repo$"
 
   /**
    * * support build x86 - intel CPU image on Mac M1 chip required run 'docker buildx install' to

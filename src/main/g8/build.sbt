@@ -8,13 +8,12 @@ lazy val autoImportSettings = Seq(
   scalacOptions += "-Yimports:zio,scala,scala.Predef"
 )
 
-ThisBuild / organization := "com.example"
-
 lazy val root = (project in file("."))
   .enablePlugins(ScalaJSPlugin, DockerPlugin)
   .settings(
-    name         := "tyrian-flowbite",
-    scalaVersion := "3.5.1",
+    organization := "$organization$",
+    name := "$name;format="norm"$",
+    scalaVersion := "$scala_version$",
     scalaJSLinkerConfig ~= { _.withModuleKind(ModuleKind.ESModule) },
     scalaJSUseMainModuleInitializer := true,
     // Source maps seem to be broken with bundler
