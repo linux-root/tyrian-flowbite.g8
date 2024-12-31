@@ -1,9 +1,9 @@
-package $organization$.view
+package $package$.view
 
 import tyrian.Html.*
 import tyrian.Html
-import com.example.model.Msg
-import com.example.view.components.Icons
+import $package$.model.Msg
+import $package$.view.components.Icons
 
 object ComponentsDemo:
 

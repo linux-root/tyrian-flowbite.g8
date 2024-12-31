@@ -1,9 +1,9 @@
-package $organization$.view
+package $package$.view
 
 import tyrian.Html.*
 import tyrian.Html
-import $organization$.model.Msg
-import $organization$.util.ElementIdGenerator
+import $package$.model.Msg
+import $package$.util.ElementIdGenerator
 
 object Tooltip:
 

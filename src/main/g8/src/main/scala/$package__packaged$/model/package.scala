@@ -1,4 +1,4 @@
-package $organization$
+package $package$
 
 object model {
   enum Msg {

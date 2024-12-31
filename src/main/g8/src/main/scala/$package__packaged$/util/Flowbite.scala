@@ -1,4 +1,4 @@
-package $organization$.util
+package $package$.util
 
 import scala.scalajs.js
 import scala.scalajs.js.annotation.JSImport

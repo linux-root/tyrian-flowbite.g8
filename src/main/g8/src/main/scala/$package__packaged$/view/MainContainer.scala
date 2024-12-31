@@ -1,8 +1,8 @@
-package $organization$.view
+package $package$.view
 
 import tyrian.Html.*
 import tyrian.Html
-import $organization$.model.Msg
+import $package$.model.Msg
 
 object MainContainer:
 

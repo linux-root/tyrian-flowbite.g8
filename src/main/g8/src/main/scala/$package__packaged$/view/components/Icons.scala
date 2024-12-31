@@ -1,4 +1,4 @@
-package $organization$.view.components
+package $package$.view.components
 
 import tyrian.Html
 

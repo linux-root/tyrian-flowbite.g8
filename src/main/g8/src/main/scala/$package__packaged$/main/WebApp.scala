@@ -1,17 +1,17 @@
-package $organization$.main
+package $package$.main
 
 import tyrian.Html.*
 import tyrian.*
 import zio.*
 import zio.interop.catz.*
-import $organization$.model.*
-import $organization$.util.Flowbite
+import $package$.model.*
+import $package$.util.Flowbite
 import scala.scalajs.js
 import scala.scalajs.js.annotation.*
 import tyrian.CSS.*
 import tyrian.Routing
-import $organization$.view.MainContainer
-import $organization$.view.Welcome
+import $package$.view.MainContainer
+import $package$.view.Welcome
 
 @JSImport("resources/index.css", JSImport.Default)
 @js.native

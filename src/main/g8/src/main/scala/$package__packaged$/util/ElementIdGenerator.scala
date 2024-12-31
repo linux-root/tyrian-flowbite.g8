@@ -1,4 +1,4 @@
-package $organization$.util
+package $package$.util
 
 import java.util.UUID
 
