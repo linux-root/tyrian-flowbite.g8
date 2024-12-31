@@ -8,3 +8,5 @@ project/plugins/project/
 .bloop
 project/project
 project/metals.sbt
+docs/.DS_Store
+.DS_Store
