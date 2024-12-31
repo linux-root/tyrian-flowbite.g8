@@ -44,6 +44,8 @@ lazy val root = (project in file("."))
     } ++ Seq(Cmd("COPY", "nginx.conf", "/etc/nginx/nginx.conf"), Cmd("CMD", """["nginx", "-g", "daemon off;"]""")),
     Docker / mappings ++= {
       import sys.process._
+      println(s"\n\$GREEN Installing npm packages...\$RESET")
+      "npm install".!
       println(s"\n\n\$GREEN Webpack bundling...\$RESET\n\n")
       val result          = "npm run build:prod".!
       val frontendDist    = baseDirectory.value / "dist"
