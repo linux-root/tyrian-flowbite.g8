@@ -45,7 +45,7 @@ webpackDevServer := {
     println(s"\n\${scala.Console.GREEN}Installing npm packages...\${scala.Console.RESET}")
     "npm install".!
     println(s"\n\${scala.Console.GREEN}Spawning up Dev server...")
-    println(s"\n\${scala.Console.GREEN}It will be available soon on : \${scala.Console.YELLOW}http://localhost:9876 \${scala.Console.RESET}")
+    println(s"\n\${scala.Console.GREEN}It will be available shortly on : \${scala.Console.YELLOW}http://localhost:9876 \${scala.Console.RESET}")
     "npm run dev".!
   } else {
     println(s"\n\${scala.Console.RED}Please run watch command first. Then run dev command in a separated terminal\n\${scala.Console.RESET}")
