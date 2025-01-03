@@ -1,16 +1,17 @@
-package $package$.view
+package $package$.view.pages
 
 import tyrian.Html.*
 import tyrian.Html
 import $package$.model.Msg
+import $package$.page.Page
 import $package$.view.components.Icons
 
 object ComponentsDemo:
 
-  private def componentItem(name: String, url: String, imageUrl: String): Html[Msg] =
+  private def componentItem(name: String, page: Page, imageUrl: String): Html[Msg] =
     a(
-      href := url,
-      cls  := "h-64 bg-white rounded-lg border border-gray-100 hover:border-white dark:border-gray-800 dark:hover:border-gray-700 hover:shadow-lg dark:hover:shadow-lg-light dark:bg-gray-900"
+      onClick(Msg.NavigateTo(page)),
+      cls := "h-64 bg-white rounded-lg border border-gray-100 hover:border-white dark:border-gray-800 dark:hover:border-gray-700 hover:shadow-lg dark:hover:shadow-lg-light dark:bg-gray-900"
     )(
       div(
         cls := "bg-gray-50 dark:bg-gray-800 rounded-t-md py-2.5 px-5 flex justify-between items-center border-b border-gray-200 dark:border-gray-700"
@@ -44,13 +45,13 @@ object ComponentsDemo:
     )
 
   def apply(): Html[Msg] =
-    val alert      = componentItem("Alerts", "/", "/assets/images/alerts.svg")
-    val button     = componentItem("Button", "/", "/assets/images/buttons.svg")
-    val accordion  = componentItem("Accordion", "/", "/assets/images/accordion.svg")
-    val badges     = componentItem("Badges", "/", "/assets/images/badges.svg")
-    val cards      = componentItem("Cards", "/", "/assets/images/cards.svg")
-    val carousel   = componentItem("Carousel", "/", "/assets/images/carousel.svg")
-    val components = List(alert, accordion, button, badges, cards, carousel)
-    div(cls := "grid grid-cols-1 gap-16 sm:grid-cols-2 xl:grid-cols-3 my-8")(
+    val alert      = componentItem("Alerts", Page.Alerts, "/assets/images/alerts.svg")
+    val buttons    = componentItem("Button", Page.Buttons, "/assets/images/buttons.svg")
+    val accordion  = componentItem("Accordion", Page.Accordion, "/assets/images/accordion.svg")
+    val badges     = componentItem("Badges", Page.Badges, "/assets/images/badges.svg")
+    val cards      = componentItem("Cards", Page.Cards, "/assets/images/cards.svg")
+    val carousel   = componentItem("Carousel", Page.Carousel, "/assets/images/carousel.svg")
+    val components = List(cards, buttons, alert, accordion, badges, carousel)
+    div(cls := "cursor-pointer w-full grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3 my-8")(
       components
     )

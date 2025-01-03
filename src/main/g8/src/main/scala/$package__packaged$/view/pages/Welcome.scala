@@ -1,4 +1,4 @@
-package $package$.view
+package $package$.view.pages
 
 import tyrian.Html.*
 import tyrian.Html
@@ -25,12 +25,10 @@ object Welcome:
     div(cls := "flex flex-col items-center mb-8")(
       div(cls := "my-8")(title),
       div(cls := "max-w bg-white border border-gray-200 rounded-lg shadow-xl dark:bg-gray-800 dark:border-gray-700")(
-        a(href := "#")(
+        a(href := "https://github.com/linux-root/tyrian-flowbite.g8")(
           img(cls := "rounded-t-lg", src := "assets/images/image-1.jpg")
         ),
         div(cls := "p-5")(
-          a(href := "#")(
-          ),
           p(cls := "mb-3 font-normal text-gray-700 dark:text-gray-400")(
             p(cls := "mb-3 font-large text-gray-900 dark:text-gray-300")(
               text("Experience the power of"),
