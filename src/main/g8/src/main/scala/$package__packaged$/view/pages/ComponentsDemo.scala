@@ -3,7 +3,7 @@ package $package$.view.pages
 import tyrian.Html.*
 import tyrian.Html
 import $package$.model.Msg
-import $package$.page.Page
+import $package$.page.*
 import $package$.view.components.Icons
 
 object ComponentsDemo:
@@ -47,11 +47,13 @@ object ComponentsDemo:
   def apply(): Html[Msg] =
     val alert      = componentItem("Alerts", Page.Alerts, "/assets/images/alerts.svg")
     val buttons    = componentItem("Button", Page.Buttons, "/assets/images/buttons.svg")
+    val toggle     = componentItem("Toggle", Page.Toggle, "/assets/images/toggle.svg")
+    val datepicker = componentItem("Datepicker", Page.Datepicker, "/assets/images/datepicker.svg")
     val accordion  = componentItem("Accordion", Page.Accordion, "/assets/images/accordion.svg")
     val badges     = componentItem("Badges", Page.Badges, "/assets/images/badges.svg")
     val cards      = componentItem("Cards", Page.Cards, "/assets/images/cards.svg")
     val carousel   = componentItem("Carousel", Page.Carousel, "/assets/images/carousel.svg")
-    val components = List(cards, buttons, alert, accordion, badges, carousel)
+    val components = List(cards, buttons, toggle, datepicker, alert, accordion, badges, carousel)
     div(cls := "cursor-pointer w-full grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3 my-8")(
       components
     )
