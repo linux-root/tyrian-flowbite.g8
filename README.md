@@ -24,7 +24,7 @@ Welcome to the Scala.js Project Template! This template sets up a Scala.js proje
 
 ## Demo
 
-- [Live demo](http://tyrian-flowbite-409356379.us-east-2.elb.amazonaws.com/)
+- [Live demo](https://tyrian-flowbite.netlify.app)
 - [Example project](https://github.com/linux-root/tyrian-flowbite-quickstart)
 
 ## Getting Started
