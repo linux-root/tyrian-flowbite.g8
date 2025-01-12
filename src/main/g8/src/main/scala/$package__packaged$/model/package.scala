@@ -4,8 +4,8 @@ import tyrian.Location
 
 object model {
   enum Msg {
-    case NoOp                    extends Msg
-    case LogMessage(msg: String) extends Msg
+    case NoOp
+    case LogMessage(msg: String)
     case NavigateTo(page: Page)
     case DoNavigate(page: Page)
     case UnhandledRoute(path: String)
