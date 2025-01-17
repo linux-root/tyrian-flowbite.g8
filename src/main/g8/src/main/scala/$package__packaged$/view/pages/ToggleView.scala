@@ -15,7 +15,7 @@ object ToggleView:
     )
 
   private def toggleBlock(toggle: Html[Msg]) =
-    div(cls := "flex flex-row max-w-full p-6 my-4 bg-white border border-gray-200 rounded-lg shadow")(
+    div(cls := "flex flex-row max-w-full p-6 my-4 bg-white border border-gray-200 dark:bg-gray-600 rounded-lg shadow")(
       toggle
     )
 

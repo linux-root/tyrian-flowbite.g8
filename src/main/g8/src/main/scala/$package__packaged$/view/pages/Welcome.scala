@@ -8,7 +8,12 @@ object Welcome:
 
   def apply(message: String): Html[Msg] =
     val tyrianLink =
-      a(href := "https://tyrian.indigoengine.io", rel := "noopener noreferrer", target := "_blank", cls := "text-purple-700 hover:underline")(
+      a(
+        href   := "https://tyrian.indigoengine.io",
+        rel    := "noopener noreferrer",
+        target := "_blank",
+        cls    := "text-purple-700 dark:text-purple-900 hover:underline"
+      )(
         "Tyrian"
       )
     val flowbiteLink = a(href := "https://flowbite.com", rel := "noopener noreferrer", target := "_blank", cls := "text-blue-700 hover:underline")(
@@ -24,7 +29,7 @@ object Welcome:
 
     div(cls := "flex flex-col items-center mb-8")(
       div(cls := "my-8")(title),
-      div(cls := "max-w bg-white border border-gray-200 rounded-lg shadow-xl dark:bg-gray-800 dark:border-gray-700")(
+      div(cls := "max-w bg-white border border-gray-200 rounded-lg shadow-xl dark:bg-gray-600")(
         a(href := "https://github.com/linux-root/tyrian-flowbite.g8")(
           img(cls := "rounded-t-lg", src := "assets/images/image-1.jpg")
         ),

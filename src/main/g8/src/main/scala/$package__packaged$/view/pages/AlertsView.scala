@@ -135,7 +135,7 @@ object AlertsView:
   val alert4 = alert(yellowStyle)
   val alert5 = alert(grayStyle)
 
-  def apply() = div(cls := "max-w-full p-6 bg-white border border-gray-200 rounded-lg shadow")(
+  def apply() = div(cls := "max-w-full p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-600")(
     alert1,
     alert2,
     alert3,

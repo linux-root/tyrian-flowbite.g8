@@ -48,6 +48,9 @@ object WebApp extends TyrianZIOApp[Msg, Model]:
   def update(model: Model): Msg => (Model, Cmd[Task, Msg]) =
     case Msg.NoOp => (model, Cmd.None)
 
+    case Msg.ToggleDarkMode =>
+      (model.toggleDarkMode, Cmd.None)
+
     case Msg.GoToInternet(loc) =>
       (model, Nav.loadUrl(loc.url))
 
@@ -66,6 +69,6 @@ object WebApp extends TyrianZIOApp[Msg, Model]:
 
   def view(model: Model): Html[Msg] =
     val pageContent = model.currentPage.render(model)
-    MainContainer(pageContent)
+    MainContainer(pageContent, model.isDarkMode)
 
   def subscriptions(model: Model): Sub[Task, Msg] = Sub.None

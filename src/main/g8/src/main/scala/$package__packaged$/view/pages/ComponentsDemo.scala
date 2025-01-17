@@ -9,6 +9,9 @@ import $package$.view.components.Icons
 object ComponentsDemo:
 
   private def componentItem(name: String, page: Page, imageUrl: String): Html[Msg] =
+    val lightImage = imageUrl + ".svg"
+    val darkImage  = imageUrl + "-dark.svg"
+
     a(
       onClick(Msg.NavigateTo(page)),
       cls := "h-64 bg-white rounded-lg border border-gray-100 hover:border-white dark:border-gray-800 dark:hover:border-gray-700 hover:shadow-lg dark:hover:shadow-lg-light dark:bg-gray-900"
@@ -23,7 +26,7 @@ object ComponentsDemo:
           )(
             img(
               alt   := "Alerts",
-              src   := imageUrl,
+              src   := lightImage,
               style := "position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%; object-fit: contain;",
               sizes := "100vw"
             )
@@ -35,7 +38,7 @@ object ComponentsDemo:
           )(
             img(
               alt   := "Alerts",
-              src   := "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
+              src   := darkImage,
               cls   := "w-56",
               style := "position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%; object-fit: contain;"
             )
@@ -45,14 +48,14 @@ object ComponentsDemo:
     )
 
   def apply(): Html[Msg] =
-    val alert      = componentItem("Alerts", Page.Alerts, "/assets/images/alerts.svg")
-    val buttons    = componentItem("Button", Page.Buttons, "/assets/images/buttons.svg")
-    val toggle     = componentItem("Toggle", Page.Toggle, "/assets/images/toggle.svg")
-    val datepicker = componentItem("Datepicker", Page.Datepicker, "/assets/images/datepicker.svg")
-    val accordion  = componentItem("Accordion", Page.Accordion, "/assets/images/accordion.svg")
-    val badges     = componentItem("Badges", Page.Badges, "/assets/images/badges.svg")
-    val cards      = componentItem("Cards", Page.Cards, "/assets/images/cards.svg")
-    val carousel   = componentItem("Carousel", Page.Carousel, "/assets/images/carousel.svg")
+    val alert      = componentItem("Alerts", Page.Alerts, "/assets/images/alerts")
+    val buttons    = componentItem("Button", Page.Buttons, "/assets/images/buttons")
+    val toggle     = componentItem("Toggle", Page.Toggle, "/assets/images/toggle")
+    val datepicker = componentItem("Datepicker", Page.Datepicker, "/assets/images/datepicker")
+    val accordion  = componentItem("Accordion", Page.Accordion, "/assets/images/accordion")
+    val badges     = componentItem("Badges", Page.Badges, "/assets/images/badges")
+    val cards      = componentItem("Cards", Page.Cards, "/assets/images/cards")
+    val carousel   = componentItem("Carousel", Page.Carousel, "/assets/images/carousel")
     val components = List(cards, buttons, toggle, datepicker, alert, accordion, badges, carousel)
     div(cls := "cursor-pointer w-full grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3 my-8")(
       components

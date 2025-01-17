@@ -10,11 +10,15 @@ object model {
     case DoNavigate(page: Page)
     case UnhandledRoute(path: String)
     case GoToInternet(loc: Location.External)
+    case ToggleDarkMode
   }
 
-  case class Model(currentPage: Page)
+  case class Model(currentPage: Page, isDarkMode: Boolean) {
+    def toggleDarkMode: Model =
+      copy(isDarkMode = !isDarkMode)
+  }
 
   object Model {
-    val init: Model = Model(Page.Home)
+    val init: Model = Model(Page.Home, isDarkMode = false)
   }
 }

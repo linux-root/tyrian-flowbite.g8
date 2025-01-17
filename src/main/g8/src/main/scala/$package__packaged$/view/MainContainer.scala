@@ -21,10 +21,21 @@ object MainContainer:
       )
     )
 
-  def apply(content: Html[Msg]): Html[Msg] =
-    div(cls := "flex flex-col min-h-screen bg-gray-100")(
-      main(cls := "flex-grow container mx-auto p-4 bg-gray-100")(
-        content
-      ),
-      theFooter
+  private def darkModeSwitchButton(isDark: Boolean) =
+    val dark   = "dark:text-white dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-800"
+    val normal = "text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300"
+    button(
+      onClick(Msg.ToggleDarkMode),
+      cls := s"fixed top-8 right-8 text-sm p-4 me-2 mb-2 font-medium rounded-full focus:outline-none \$normal \$dark"
+    )(if isDark then Icons.sun else Icons.moon)
+
+  def apply(content: Html[Msg], isDark: Boolean): Html[Msg] =
+    div(cls := (if isDark then "dark" else "not-dark-mode"))(
+      darkModeSwitchButton(isDark),
+      div(cls := "flex flex-col min-h-screen bg-gray-100 dark:bg-gray-400")(
+        main(cls := "flex-grow container mx-auto p-4 bg-gray-100 dark:bg-gray-400")(
+          content
+        ),
+        theFooter
+      )
     )

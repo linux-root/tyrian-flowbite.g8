@@ -18,7 +18,7 @@ object BadgesView:
     )
 
   private def badges(spans: List[Html[Msg]]): Html[Msg] =
-    div(cls := "flex flex-row mx-auto max-w-full p-6 my-4 bg-white border border-gray-200 rounded-lg shadow")(
+    div(cls := "flex flex-row mx-auto max-w-full p-6 my-4 dark:bg-gray-600 bg-white border border-gray-200 rounded-lg shadow")(
       spans
     )
 
