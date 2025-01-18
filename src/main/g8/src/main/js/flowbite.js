@@ -5,5 +5,5 @@ import { initFlowbite } from 'flowbite'
 
 export function init() {
   initFlowbite()
-  console.log('FlowBite is intialized')
+  console.log('FlowBite is initialized')
 }
