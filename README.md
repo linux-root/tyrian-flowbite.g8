@@ -44,6 +44,7 @@ mill -i init linux-root/tyrian-flowbite.g8
 
 - [Java JDK](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html) (11 or higher)
 - [sbt](https://www.scala-sbt.org/download.html) (Scala Build Tool)
+- [Nodejs V22.13.0] (<https://nodejs.org/en/blog/release/v22.13.0>)
 
 ## Template license
 
