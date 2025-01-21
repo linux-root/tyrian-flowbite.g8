@@ -1,24 +1,28 @@
 package $package$
 
 import tyrian.Cmd
-import zio.*
 import tyrian.Html
 import tyrian.Html.div
 import java.util.UUID
 import $package$.model.*
 import $package$.view.pages.*
 import tyrian.cmds.Logger
+$if(use_zio.truthy)$
+import zio.*
 import zio.interop.catz.*
+$else$
+import cats.effect.IO
+$endif$
 import $package$.util.PrettyLogger
 
 package object page {
   enum Page(
     val path: String,
     val render: Model => Html[Msg],
-    beforeEnter: Model => Cmd[Task, Msg] = _ => Cmd.None, // e.g: side effect for loading data
+    beforeEnter: Model => Cmd[$if(use_zio.truthy)$Task$else$IO$endif$, Msg] = _ => Cmd.None, // e.g: side effect for loading data
     val isSecured: Boolean = true
   ):
-    def doNavigate(model: Model): Cmd[Task, Msg] = beforeEnter(model) |+| Cmd.emit(Msg.DoNavigate(this))
+    def doNavigate(model: Model): Cmd[$if(use_zio.truthy)$Task$else$IO$endif$, Msg] = beforeEnter(model) |+| Cmd.emit(Msg.DoNavigate(this))
 
     case Home       extends Page("/", model => Welcome("Hello world"), _ => PrettyLogger.info("Entering Home page"))
     case Alerts     extends Page("/components/alerts", model => AlertsView(), _ => PrettyLogger.info("Entering Alerts page"))

@@ -2,11 +2,16 @@ package $package$.util
 
 import org.scalajs.dom.console
 import tyrian.Cmd
+$if(use_zio.truthy)$
 import zio.Task
 import zio.interop.catz.*
+$else$
+import cats.effect.*
+import cats.effect.Sync
+$endif$
 
 object PrettyLogger {
-  def success(msg: String): Cmd[Task, Nothing] =
+  def success(msg: String): Cmd[$if(use_zio.truthy)$Task$else$IO$endif$, Nothing] =
     Cmd.SideEffect(
       console.log(
         s"%c😇 \$msg %c",
@@ -15,7 +20,7 @@ object PrettyLogger {
       )
     )
 
-  def info(msg: String): Cmd[Task, Nothing] =
+  def info(msg: String): Cmd[$if(use_zio.truthy)$Task$else$IO$endif$, Nothing] =
     Cmd.SideEffect(
       console.log(
         s"%cℹ️ \$msg %c",
@@ -24,7 +29,7 @@ object PrettyLogger {
       )
     )
 
-  def error(msg: String): Cmd[Task, Nothing] =
+  def error(msg: String): Cmd[$if(use_zio.truthy)$Task$else$IO$endif$, Nothing] =
     Cmd.SideEffect(
       console.log(
         s"%cℹ️ \$msg %c",
