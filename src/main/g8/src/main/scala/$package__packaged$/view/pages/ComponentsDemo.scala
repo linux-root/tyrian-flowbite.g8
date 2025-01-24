@@ -14,7 +14,7 @@ object ComponentsDemo:
 
     a(
       onClick(Msg.NavigateTo(page)),
-      cls := "h-64 bg-white rounded-lg border border-gray-100 hover:border-white dark:border-gray-800 dark:hover:border-gray-700 hover:shadow-lg dark:hover:shadow-lg-light dark:bg-gray-900"
+      cls := "h-64 bg-white rounded-lg shadow-md transition-transform duration-300 ease-in-out hover:scale-105 border border-gray-100 hover:border-white dark:border-gray-800 dark:hover:border-gray-700 hover:shadow-lg dark:hover:shadow-lg-light dark:bg-gray-900"
     )(
       div(
         cls := "bg-gray-50 dark:bg-gray-800 rounded-t-md py-2.5 px-5 flex justify-between items-center border-b border-gray-200 dark:border-gray-700"
