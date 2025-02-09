@@ -4,6 +4,7 @@ import tyrian.Html.*
 import tyrian.Html.{attribute => attr}
 import tyrian.Html
 import com.example.tfwithbackend.model.Msg
+import com.example.common.BuildInfo
 
 object CardsView:
   def apply(): Html[Msg] =
@@ -102,7 +103,7 @@ object CardsView:
           cls := "flex mt-4 md:mt-6"
         )(
           a(
-            href := "https://www.linkedin.com/in/user777",
+            href := BuildInfo.backendBaseUrl,
             cls  := "inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
           )("Add friend"),
           a(

@@ -82,6 +82,7 @@ object WebApp extends TyrianZIOApp[Msg, Model]:
     case Msg.LoginSuccess(accessToken, refreshToken) =>
       val saveTokenAndEnterHome = LocalStorageHelper.storeSession(accessToken, refreshToken) |+| Cmd.Emit(Msg.NavigateTo(Page.Home))
       (model.loginSuccess(accessToken, refreshToken), saveTokenAndEnterHome)
+
     case Msg.LoginFailure(msg) =>
       (model.modify(_.loginForm.error).setTo(Some(msg)), Cmd.None)
 
@@ -90,6 +91,7 @@ object WebApp extends TyrianZIOApp[Msg, Model]:
 
     case Msg.DoNavigate(page) =>
       (model.modify(_.currentPage).setTo(page), Nav.pushUrl[Task](page.path) |+| Flowbite.initCmd)
+
     case Msg.UnhandledRoute(path) =>
       (model, PrettyLogger.error("Unhandled route" + path))
 
@@ -97,7 +99,7 @@ object WebApp extends TyrianZIOApp[Msg, Model]:
       (model.modify(_.homeState.serverMessage).setTo(Some(text)), PrettyLogger.info(text))
 
     case Msg.NextBackendMessage =>
-      (model, HttpHelper.fetchServerMessage)
+      (model, HttpHelper.fetchServerMessage2)
 
     case Msg.SendHttpRequestWithAccessToken(f) =>
       val cmd = model.user match

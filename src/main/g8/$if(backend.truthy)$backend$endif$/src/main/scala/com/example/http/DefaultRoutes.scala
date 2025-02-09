@@ -82,13 +82,34 @@ object DefaultRoutes {
     )
 
   val public = Routes(
+    Method.GET / Root ->
+      handler(
+        Response.redirect(URL.decode(PathDef.ping.toString).toOption.get)
+      ),
+    Method.GET / PathDef.ping ->
+      handler(
+        Response(
+          status = Status.Ok,
+          headers = Headers(Header.ContentType(MediaType.text.html)),
+          body = Body.fromString(HtmlContent.value)
+        )
+      ),
+    Method.GET / PathDef.ping ->
+      handler(
+        Response(
+          status = Status.Ok,
+          headers = Headers(Header.ContentType(MediaType.text.html)),
+          body = Body.fromString(HtmlContent.value)
+        )
+      ),
     Method.POST / PathDef.login ->
       handler(parseJson >>> processLogin)
   ) @@ corsMiddleWare
 
   val authenticated = withAuthMiddleware {
     Routes(
-      Method.GET / PathDef.randomMessage -> handler(RandomQuotes.getRandomMessage.map(msg => Response.json(RandomMessage(msg).toJson)))
+      Method.GET / PathDef.randomMessage -> handler(RandomQuotes.getRandomMessage.map(msg => Response.json(RandomMessage(msg).toJson))),
+      Method.GET / PathDef.randomMessage2 -> handler(RandomQuotes.getRandomMessage.map(msg => Response.json(RandomMessage(msg).toJson)))
     )
   } @@ corsMiddleWare
 

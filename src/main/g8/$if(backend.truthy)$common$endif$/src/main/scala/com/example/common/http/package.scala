@@ -17,6 +17,8 @@ package object http {
     val prefix: PathCodec[Unit]                 = Root / "api" / "v1"
     val login: PathCodec[Unit]                  = prefix / "login"
     val randomMessage: PathCodec[Unit]          = prefix / "random-message"
+    val randomMessage2: PathCodec[Unit]         = prefix / "random-message2"
+    val ping: PathCodec[Unit]                   = prefix / "scala"
     val subscribeServerMessage: PathCodec[Unit] = prefix / "subscribe"
   }
 
@@ -48,6 +50,7 @@ package object http {
 
     val login: String                  = generateUrl(PathDef.login.format(()))
     val randomMessage: String          = generateUrl(PathDef.randomMessage.format(()))
+    val randomMessage2: String         = generateUrl(PathDef.randomMessage2.format(()))
     val subscribeServerMessage: String = generateWsUrl(PathDef.subscribeServerMessage.format(()))
   }
 }
