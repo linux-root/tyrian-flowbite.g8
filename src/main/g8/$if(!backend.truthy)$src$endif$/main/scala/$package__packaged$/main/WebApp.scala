@@ -68,6 +68,7 @@ object WebApp extends $if(use_zio.truthy)$TyrianZIOApp$else$TyrianIOApp$endif$[M
 
     case Msg.DoNavigate(page) =>
       (model.modify(_.currentPage).setTo(page), Nav.pushUrl[$if(use_zio.truthy)$Task$else$IO$endif$](page.path) |+| Flowbite.initCmd)
+
     case Msg.UnhandledRoute(path) =>
       (model, PrettyLogger.error(s"Unhandled route: \$path"))
 

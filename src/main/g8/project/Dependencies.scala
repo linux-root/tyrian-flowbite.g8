@@ -4,7 +4,7 @@ object Dependencies {
   val Quicklens = "1.9.7"
 
   $if(use_zio.truthy) $
-  val ZioInteropCats = "23.1.0.3"j
+  val ZioInteropCats = "23.1.0.3"
   $endif$
   val JavaSecureRandom = "1.0.0"
 

@@ -1,12 +1,5 @@
-import org.apache.tools.ant.taskdefs.Taskdef
 import sbtwelcome._
-import scala.sys.process._
-import scala.collection.compat.immutable.LazyList
-import sys.env
 import scala.Console._
-import scala.concurrent.ExecutionContext.Implicits.global
-import scala.concurrent.Future
-import java.nio.file.{Files, Paths}
 
 /**
  * Logo generated on [[https://patorjk.com]]
@@ -37,33 +30,3 @@ usefulTasks := Seq(
 )
 
 logoColor := MAGENTA
-
-
-val installNpmPackages: () => Unit = () => {
-  println(s"\n\$GREEN Installing npm packages...\$RESET")
-  "npm install".!
-}
-
-lazy val webpackDevServer = taskKey[Unit]("Start dev server. Should be oppened in a separated terminal")
-
-webpackDevServer := {
-  val compiledScalajsFile = Paths.get(s"target/scala-\${scalaVersion.value}/$name$-fastopt/main.js")
-  println(compiledScalajsFile)
-  if (Files.exists(compiledScalajsFile)) {
-    installNpmPackages()
-    println(s"\n\$GREEN Spawning up Dev server...")
-    println(s"\n\n\nServer will be available shortly on : \$YELLOW http://localhost:9876 \$RESET\n\n\n")
-    "npm run dev".!
-  } else {
-    println(s"\n\$RED Please run watch command first. Then run dev command in a separated terminal\n\$RESET")
-  }
-}
-
-lazy val publishDist = taskKey[Unit]("Build static web artifact")
-
-publishDist := {
-  val ignored = (Compile / fullLinkJS).value
-  installNpmPackages()
-  println(s"\n\$GREEN Creating dist...\$RESET")
-  "npm run build:prod".!
-}

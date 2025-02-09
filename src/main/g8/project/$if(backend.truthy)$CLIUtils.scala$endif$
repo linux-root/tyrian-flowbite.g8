@@ -22,7 +22,7 @@ object CLIUtils {
   def boxedText(lines: String*): String = formatBoxContent(lines, green)
 
   def boxedConfigs(configs: (String, String)*): String = {
-    val formattedLines = configs.map { case (key, value) => s"$key: $value" }
+    val formattedLines = configs.map { case (key, value) => s"\$key: \$value" }
     formatBoxContent(formattedLines, green)
   }
 
@@ -30,20 +30,20 @@ object CLIUtils {
 
   private def installNpmPackages(): Unit = {
     val command        = List("npm", "install", "--prefix", "frontend")
-    val pattern        = "found\\s\\d+\\svulnerabilities".r
+    val pattern        = "found\\\s\\\d+\\\svulnerabilities".r
     val successMessage = boxedText("Installed npm packages successfully !")
     CommandWatcher.watch(command, pattern, successMessage)
   }
 
   def startFrontendDevServer(scalaVersion: String, backendUrl: String): Unit = {
-    val compiledScalajsFile = Paths.get(s"frontend/target/scala-$scalaVersion/frontend-fastopt/main.js")
+    val compiledScalajsFile = Paths.get(s"frontend/target/scala-\$scalaVersion/frontend-fastopt/main.js")
     if (Files.exists(compiledScalajsFile)) {
       installNpmPackages()
       val devCommand = Seq("npm", "run", "dev", "--prefix", "frontend")
       val pattern    = "compiled successfully".r
       val successMessage = boxedText(
         "Web app now available on http://localhost:9876",
-        s"Using Backend URL: $backendUrl",
+        s"Using Backend URL: \$backendUrl",
         tip1
       )
       CommandWatcher.watch(devCommand, pattern, successMessage)
@@ -57,7 +57,7 @@ object CLIUtils {
     installNpmPackages()
     val buildCommand   = Seq("npm", "run", "build:prod", "--prefix", "frontend")
     val pattern        = "webpack 5.97.1 compiled".r
-    val successMessage = boxedText("Web app is available at directory 'frontend/dist'", s"Backend URL of this build: $backendUrl", tip1)
+    val successMessage = boxedText("Web app is available at directory 'frontend/dist'", s"Backend URL of this build: \$backendUrl", tip1)
     CommandWatcher.watch(buildCommand, pattern, successMessage)
   }
 }

@@ -22,6 +22,6 @@ object Flowbite:
     $if(use_zio.truthy)$
     val effect = ZIO.attempt(FlowbiteJS.init()).delay(100.millis)
     $else$
-    val effect = Temporal[IO].sleep(100.millis) *> Sync[IO].pure(FlowbiteJS.init())
+    val effect = Temporal[IO].sleep(100.millis) *> Sync[IO].delay(FlowbiteJS.init())
     $endif$
     Cmd.SideEffect(effect)

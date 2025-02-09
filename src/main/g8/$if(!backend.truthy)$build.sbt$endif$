@@ -1,8 +1,8 @@
 import sbt.io.Path.relativeTo
-import scala.Console._
 import com.typesafe.sbt.packager.docker.{Cmd, ExecCmd}
-import sbt._
-import Keys._
+
+lazy val webpackDevServer = taskKey[Unit]("Start the dev server. It should be opened in a separate terminal")
+lazy val publishDist      = taskKey[Unit]("Build a static web artifact")
 
 lazy val root = (project in file("."))
   .enablePlugins(ScalaJSPlugin, DockerPlugin)
@@ -41,11 +41,7 @@ lazy val root = (project in file("."))
 
     } ++ Seq(Cmd("COPY", "nginx.conf", "/etc/nginx/nginx.conf"), Cmd("CMD", """["nginx", "-g", "daemon off;"]""")),
     Docker / mappings ++= {
-      import sys.process._
-      println(s"\n\$GREEN Installing npm packages...\$RESET")
-      "npm install".!
-      println(s"\n\n\$GREEN Webpack bundling...\$RESET\n\n")
-      val result          = "npm run build:prod".!
+      publishDist.value
       val frontendDist    = baseDirectory.value / "dist"
       val nginxConfigFile = baseDirectory.value / "nginx.conf"
 
@@ -53,5 +49,14 @@ lazy val root = (project in file("."))
         file -> s"/usr/share/nginx/html/\${frontendDist.relativize(file).get.getPath}"
       } :+ (nginxConfigFile -> "/nginx.conf")
 
+    }
+  )
+  .settings(
+    webpackDevServer := {
+      CLIUtils.startFrontendDevServer("$name$", scalaVersion.value, Environtments.backendBaseUrl)
+    },
+    publishDist := {
+      (Compile / fullLinkJS).value
+      CLIUtils.buildFrontend(Environtments.backendBaseUrl)
     }
   )

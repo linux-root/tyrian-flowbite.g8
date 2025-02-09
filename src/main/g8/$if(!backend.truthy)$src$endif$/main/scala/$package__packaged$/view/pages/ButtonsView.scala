@@ -18,7 +18,7 @@ object ButtonsView:
     )
 
   private def buttonBlock(buttons: List[Html[Msg]]) =
-    div(cls := "flex flex-row max-w-full p-6 my-4 bg-white border border-gray-200 rounded-lg shadow")(
+    div(cls := "flex flex-row max-w-full p-6 my-4 bg-white border border-gray-200 rounded-lg dark:bg-gray-600")(
       buttons
     )
 

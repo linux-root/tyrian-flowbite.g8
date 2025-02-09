@@ -6,13 +6,13 @@ import $package$.model.Msg
 
 object Welcome:
 
-  def apply(message: String): Html[Msg] =
+  def apply(): Html[Msg] =
     val tyrianLink =
       a(
         href   := "https://tyrian.indigoengine.io",
         rel    := "noopener noreferrer",
         target := "_blank",
-        cls    := "text-purple-700 dark:text-purple-900 hover:underline"
+        cls    := "font-mono text-purple-600 dark:text-purple-800 hover:underline"
       )(
         "Tyrian"
       )
@@ -21,9 +21,8 @@ object Welcome:
     )
 
     val title = h1(cls := "mb-2 text-4xl font-bold tracking-tight text-gray-900 dark:text-white")(
-      text("Welcome to "),
       tyrianLink,
-      text(" + "),
+      text(" <+> "),
       flowbiteLink
     )
 
@@ -32,9 +31,6 @@ object Welcome:
       div(
         cls := "max-w transition-transform duration-300 ease-in-out hover:-translate-y-2 bg-white border border-gray-200 rounded-lg shadow-xl dark:bg-gray-600"
       )(
-        a(href := "https://github.com/linux-root/tyrian-flowbite.g8")(
-          img(cls := "rounded-t-lg", src := "assets/images/image-1.jpg")
-        ),
         div(cls := "p-5")(
           p(cls := "mb-3 font-normal text-gray-700 dark:text-gray-400")(
             p(cls := "mb-3 font-large text-gray-900 dark:text-gray-300")(

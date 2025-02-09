@@ -213,7 +213,7 @@ object CardsView:
             ),
             div(
               cls := "inline-flex items-center text-base font-semibold text-gray-900 dark:text-white"
-            )("\$320")
+            )("320 BTC")
           )
         ),
         li(
@@ -243,7 +243,7 @@ object CardsView:
             ),
             div(
               cls := "inline-flex items-center text-base font-semibold text-gray-900 dark:text-white"
-            )("\$3467")
+            )("3467")
           )
         ),
         li(
@@ -273,7 +273,7 @@ object CardsView:
             ),
             div(
               cls := "inline-flex items-center text-base font-semibold text-gray-900 dark:text-white"
-            )("\$67")
+            )("67")
           )
         ),
         li(
@@ -303,7 +303,7 @@ object CardsView:
             ),
             div(
               cls := "inline-flex items-center text-base font-semibold text-gray-900 dark:text-white"
-            )("\$367")
+            )("367")
           )
         ),
         li(
@@ -333,7 +333,7 @@ object CardsView:
             ),
             div(
               cls := "inline-flex items-center text-base font-semibold text-gray-900 dark:text-white"
-            )("\$2367")
+            )("2367")
           )
         )
       )

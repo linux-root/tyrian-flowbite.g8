@@ -24,7 +24,7 @@ package object page {
   ):
     def doNavigate(model: Model): Cmd[$if(use_zio.truthy)$Task$else$IO$endif$, Msg] = beforeEnter(model) |+| Cmd.emit(Msg.DoNavigate(this))
 
-    case Home       extends Page("/", model => Welcome("Hello world"), _ => PrettyLogger.info("Entering Home page"))
+    case Home       extends Page("/", model => Welcome(), _ => PrettyLogger.info("Entering Home page"))
     case Alerts     extends Page("/components/alerts", model => AlertsView(), _ => PrettyLogger.info("Entering Alerts page"))
     case Accordion  extends Page("/components/accordion", model => AccordionView(), _ => PrettyLogger.info("Entering Accordion page"))
     case Buttons    extends Page("/components/buttons", model => ButtonsView(), _ => PrettyLogger.info("Entering Buttons page"))
