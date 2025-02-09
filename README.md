@@ -25,8 +25,10 @@ This template sets up a Scala.js project using the Tyrian framework and Flowbite
 
 ## Demo
 
-- [Live demo](https://tyrian-flowbite.netlify.app)
-- [Example project](https://github.com/linux-root/tyrian-flowbite-quickstart)
+- [Live demo - Fullstack](change)
+- [Live demo - Frontend only](https://tyrian-flowbite-quickstart.onrender.com/)
+- [Example project - Fullstack](https://github.com/linux-root/fullstack-zio-tyrian-flowbite-quickstart)
+- [Example project - Frontend only](https://github.com/linux-root/tyrian-flowbite-quickstart)
 
 ## Getting Started
 
