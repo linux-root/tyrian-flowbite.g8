@@ -34,7 +34,7 @@ object CLIUtils {
     CommandWatcher.watch(command, pattern, successMessage)
   }
 
-  def startFrontendDevServer(projectName: String, scalaVersion: String, backendUrl: String): Unit = {
+  def startFrontendDevServer(projectName: String, scalaVersion: String): Unit = {
     val compiledScalajsFile = Paths.get(s"target/scala-\$scalaVersion/\$projectName-fastopt/main.js")
 
     if (Files.exists(compiledScalajsFile)) {
@@ -51,7 +51,7 @@ object CLIUtils {
 
   }
 
-  def buildFrontend(backendUrl: String): Unit = {
+  def buildFrontend(): Unit = {
     installNpmPackages()
     val buildCommand   = Seq("npm", "run", "build:prod")
     val pattern        = "webpack 5.97.1 compiled".r

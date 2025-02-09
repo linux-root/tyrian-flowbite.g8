@@ -53,10 +53,10 @@ lazy val root = (project in file("."))
   )
   .settings(
     webpackDevServer := {
-      CLIUtils.startFrontendDevServer("$name$", scalaVersion.value, Environtments.backendBaseUrl)
+      CLIUtils.startFrontendDevServer("$name$", scalaVersion.value)
     },
     publishDist := {
       (Compile / fullLinkJS).value
-      CLIUtils.buildFrontend(Environtments.backendBaseUrl)
+      CLIUtils.buildFrontend()
     }
   )
