@@ -31,8 +31,14 @@ object HttpHelper:
     Http.send(request, loginDecoder)
   }
 
-  val fetchServerMessage: Cmd[Task, Msg.SendHttpRequestWithAccessToken] = {
-    val request = Request.get(BackendApiUrl.randomMessage)
+  val fetchServerMessage: Cmd[Task, Msg.SendHttpRequestWithAccessToken] =
+    fetchServerMessage(BackendApiUrl.randomMessage)
+
+  val fetchServerMessage2: Cmd[Task, Msg.SendHttpRequestWithAccessToken] =
+    fetchServerMessage(BackendApiUrl.randomMessage2)
+
+  private def fetchServerMessage(apiUrl: String): Cmd[Task, Msg.SendHttpRequestWithAccessToken] = {
+    val request = Request.get(apiUrl)
     sendWithAuthToken(request, greetDecoder)
   }
 
