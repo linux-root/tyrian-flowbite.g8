@@ -8,7 +8,7 @@ module.exports = {
       "resources": path.resolve(__dirname, "./src/main/resources"),
       "js": path.resolve(__dirname, "./src/main/js"),
     },
-    fallback: { "crypto": false }
+    fallback: { "crypto": false, perf_hooks: false }
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
