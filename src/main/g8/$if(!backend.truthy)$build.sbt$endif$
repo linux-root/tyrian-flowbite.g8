@@ -9,6 +9,7 @@ lazy val root = (project in file("."))
   .settings(
     organization := "$organization$",
     name := "$name;format="norm"$",
+    version      := "0.1.0",
     scalaVersion := "$scala_version$",
     scalaJSLinkerConfig ~= { _.withModuleKind(ModuleKind.ESModule) },
     scalaJSUseMainModuleInitializer := true,

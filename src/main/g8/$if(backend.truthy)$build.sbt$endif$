@@ -36,7 +36,7 @@ lazy val frontend = (project in file("frontend"))
     Docker / publishLocal := (Docker / publishLocal).dependsOn(Compile / fullLinkJS).value,
     dockerExposedPorts    := Seq(80),
     dockerRepository      := Some(DockerSettings.repository),
-    dockerAlias           := DockerAlias.apply(dockerRepository.value, None, "$name$/frontend", dockerAlias.value.tag),
+    dockerAlias           := DockerAlias.apply(dockerRepository.value, None, "$name$", dockerAlias.value.tag.map(t => "frontend-" + t)),
     DockerSettings.x86ArchSetting,
     Docker / defaultLinuxInstallLocation := "/usr/share/nginx/html",
     dockerCommands := dockerCommands.value.filter {
@@ -88,7 +88,7 @@ lazy val backend = (project in file("backend"))
     dockerBaseImage    := "openjdk:17-slim",
     dockerExposedPorts := Seq(8080),
     dockerRepository   := Some(DockerSettings.repository),
-    dockerAlias        := DockerAlias.apply(dockerRepository.value, None, "$name$/backend", dockerAlias.value.tag),
+    dockerAlias        := DockerAlias.apply(dockerRepository.value, None, "$name$", dockerAlias.value.tag.map(t => "backend-" + t)),
     DockerSettings.x86ArchSetting
   )
   .dependsOn(common.jvm)
