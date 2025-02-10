@@ -113,5 +113,5 @@ lazy val common = (crossProject(JVMPlatform, JSPlatform)
         Environtments.backendBaseUrl()
       }
     ),
-    buildInfoPackage := "$organization$.common"
+    buildInfoPackage := "$package$.common"
   )
