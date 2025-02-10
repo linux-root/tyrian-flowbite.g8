@@ -39,7 +39,7 @@ object MainContainer:
 
   private def controlButton(clickMsg: Msg, child: Elem[Msg]) =
     val dark   = "dark:text-white dark:hover:bg-purple-700 dark:focus:ring-purple-200"
-    val normal = "text-white hover:bg-purple-600 focus:ring-purple-100"
+    val normal = "text-white hover:bg-purple-700 focus:ring-purple-100"
     button(
       onClick(clickMsg),
       cls := s"transition-transform duration-300 ease-in-out hover:scale-105 p-4 me-2 mb-2 rounded-full focus:outline-none \$normal \$dark"
