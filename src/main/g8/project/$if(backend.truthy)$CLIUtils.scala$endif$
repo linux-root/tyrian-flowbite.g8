@@ -48,7 +48,7 @@ object CLIUtils {
       )
       CommandWatcher.watch(devCommand, pattern, successMessage)
     } else {
-      println(boxedError("Please run watch command first. Then run dev command in a separated terminal"))
+      println(boxedError("Please run watch command first", " Then run this in a separate terminal"))
     }
 
   }
