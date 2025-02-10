@@ -6,7 +6,7 @@ object CLIUtils {
   private val reset = "\u001B[0m"
   private val green = "\u001B[32m"
   private val red   = "\u001B[31m"
-  private val tip1  = "Tip: Change backend URL using environment variable 'BACKEND_BASE_URL'"
+  private val tip1  = "Tip: Change backend URL: BACKEND_BASE_URL=http://server.com sbt"
 
   private def formatBoxContent(lines: Seq[String], color: String): String = {
     val maxWidth = lines.map(_.length).reduceOption(_ max _).getOrElse(0) // Safe max calculation
