@@ -1,8 +1,7 @@
 import sbt.io.Path.relativeTo
 import com.typesafe.sbt.packager.docker.{Cmd, ExecCmd}
 
-lazy val scala3Version = "3.6.2"
-
+lazy val scala3Version = "$scala_version$"
 ThisBuild / organization := "$organization$"
 ThisBuild / scalaVersion := scala3Version
 
