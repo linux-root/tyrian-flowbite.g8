@@ -14,9 +14,11 @@ This template sets up a Scala.js project using the Tyrian framework for UI, ZIO-
 
 - [Live demo - Fullstack](https://fullstack-zio-tyrian-flowbite-quickstart.onrender.com/)
 - [Live demo - Frontend only](https://tyrian-flowbite-quickstart.onrender.com/)
+- [Live demo - Todo App fullstack](https://zio-tyrian-flowbite-todos-app.onrender.com)
 - [Example project - Fullstack](https://github.com/linux-root/fullstack-zio-tyrian-flowbite-quickstart)
-- [Example Todo App - Fullstack](https://github.com/linux-root/zio-tyrian-flowbite-todos-app)
 - [Example project - Frontend only](https://github.com/linux-root/tyrian-flowbite-quickstart)
+- [Example project - Todo App fullstack](https://github.com/linux-root/zio-tyrian-flowbite-todos-app)
+  
 
 ---
 
