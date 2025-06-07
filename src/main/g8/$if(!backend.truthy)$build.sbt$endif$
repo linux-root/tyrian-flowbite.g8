@@ -1,7 +1,7 @@
 import sbt.io.Path.relativeTo
 import com.typesafe.sbt.packager.docker.{Cmd, ExecCmd}
 
-lazy val webpackDevServer = taskKey[Unit]("Start the dev server. It should be opened in a separate terminal")
+lazy val viteDevServer = taskKey[Unit]("Start the dev server. It should be opened in a separate terminal")
 lazy val publishDist      = taskKey[Unit]("Build a static web artifact")
 
 lazy val root = (project in file("."))
@@ -53,7 +53,7 @@ lazy val root = (project in file("."))
     }
   )
   .settings(
-    webpackDevServer := {
+    viteDevServer := {
       CLIUtils.startFrontendDevServer("$name$", scalaVersion.value)
     },
     publishDist := {
