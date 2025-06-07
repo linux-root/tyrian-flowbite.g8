@@ -50,7 +50,7 @@ object CLIUtils {
     if (Files.exists(compiledScalajsFile)) {
       installNpmPackages("frontend")
       val devCommand = Seq("npm", "run", "dev", "--prefix", "frontend")
-      val pattern    = "compiled successfully".r
+      val pattern    = ".ready in.".r
       val successMessage = boxedSuccess(
         "Web app now available on http://localhost:9876",
         s"Using Backend URL: \$backendUrl",
@@ -66,8 +66,8 @@ object CLIUtils {
   def buildFrontend(backendUrl: String): Unit = {
     installNpmPackages("frontend")
     removeDistFolderIfAny("frontend/")
-    val buildCommand   = Seq("npm", "run", "build:prod", "--prefix", "frontend")
-    val pattern        = "webpack \\\d+\\\.\\\d+\\\.\\\d+ compiled".r
+    val buildCommand   = Seq("npm", "run", "build", "--prefix", "frontend")
+    val pattern        = ".built in.".r
     val successMessage = boxedSuccess("Web app is available at directory 'frontend/dist'", s"Backend URL of this build: \$backendUrl", tip1)
     CommandWatcher.watch(buildCommand, pattern, successMessage)
   }
@@ -78,7 +78,7 @@ object CLIUtils {
     if (Files.exists(compiledScalajsFile)) {
       installNpmPackages()
       val devCommand = Seq("npm", "run", "dev")
-      val pattern    = "compiled successfully".r
+      val pattern    = ".ready in.".r
       val successMessage = boxedSuccess(
         "Web app now available on http://localhost:9876"
       )
@@ -92,8 +92,8 @@ object CLIUtils {
   def buildFrontend(): Unit = {
     installNpmPackages()
     removeDistFolderIfAny()
-    val buildCommand   = Seq("npm", "run", "build:prod")
-    val pattern        = "webpack \\\d+\\\.\\\d+\\\.\\\d+ compiled".r
+    val buildCommand   = Seq("npm", "run", "build")
+    val pattern        = ".built in.".r
     val successMessage = boxedSuccess("Web app is available at directory 'dist'")
     CommandWatcher.watch(buildCommand, pattern, successMessage)
   }
