@@ -25,7 +25,7 @@ sbt fe dev
 ### 3. Build static web
 
 ```bash
-sbt fe dist
+sbt fe dst
 ```
 
 ## Template license
