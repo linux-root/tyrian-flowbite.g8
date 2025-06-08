@@ -6,3 +6,5 @@ if (import.meta.env.DEV) {
 } else {
     import(`./target/scala-\${scalaVersion}/\${scalaProjectName}-opt/main.js`);
 }
+
+import 'resources/index.css'
