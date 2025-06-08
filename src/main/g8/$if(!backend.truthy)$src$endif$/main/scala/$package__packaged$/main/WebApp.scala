@@ -20,14 +20,8 @@ import $package$.route.*
 import $package$.util.*
 import $package$.page.*
 
-@JSImport("resources/index.css", JSImport.Default)
-@js.native
-object IndexCSS extends js.Object
-
 @JSExportTopLevel("TyrianApp")
 object WebApp extends $if(use_zio.truthy)$TyrianZIOApp$else$TyrianIOApp$endif$[Msg, Model]:
-
-  private val css = IndexCSS // Webpack will use this css when bundling
 
   def main(args: Array[String]): Unit = launch("app") // mount the app to div with id="app"
 
