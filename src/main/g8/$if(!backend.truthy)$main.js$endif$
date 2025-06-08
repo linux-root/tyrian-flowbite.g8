@@ -1,8 +1,2 @@
-const scalaVersion = '$scala_version$'
-const scalaProjectName = '$name$'
-
-if (import.meta.env.DEV) {
-    import(`./target/scala-\${scalaVersion}/\${scalaProjectName}-fastopt/main.js`);
-} else {
-    import(`./target/scala-\${scalaVersion}/\${scalaProjectName}-opt/main.js`);
-}
+import 'scalajs'
+import 'resources/index.css'

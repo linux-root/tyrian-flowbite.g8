@@ -22,13 +22,19 @@ sbt
 sbt watch
 ```
 
-### 3. Start Webpack dev server on `http://localhost:9876`
+### 3. Start Vite dev server on `http://localhost:9876`
 
 ```bash
 sbt dev
 ```
 
-- Publish docker image Locally :
+### 4. build static web
+
+```bash
+sbt dst
+```
+
+### 5. Publish docker image Locally :
 
 ```bash
 # Nginx server serving your SPA inside docker container will
@@ -39,7 +45,7 @@ sbt dpl
 
 ## Template license
 
-Written in 2024 by Watson Dinh <mr.kurro@gmail.com>
+Written in 2024 by Watson Dinh <ping@w47s0n.com>
 
 To the extent possible under law, the author(s) have dedicated
 all copyright and related and neighboring rights to this template
