@@ -21,7 +21,7 @@ logo :=
 usefulTasks := Seq(
   UsefulTask("~fastLinkJS", "Auto re-compile when source code changes detected").alias("watch"),
   UsefulTask("viteDevServer", "Start Vite dev server").alias("dev"),
-  UsefulTask("publishDist", "Build static web artifact").alias("dist"),
+  UsefulTask("publishDist", "Build static web artifact").alias("dst"),
   UsefulTask("Docker/publishLocal", "Publish locally web app as a docker image").alias("dpl"),
   UsefulTask("Docker/publish", "Publish web app as a docker image to remote container registry").alias("dp"),
   UsefulTask("project root", "Return to root project").alias("r")

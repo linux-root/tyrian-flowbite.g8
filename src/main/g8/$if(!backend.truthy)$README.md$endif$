@@ -31,7 +31,7 @@ sbt dev
 ### 4. build static web
 
 ```bash
-sbt dist
+sbt dst
 ```
 
 ### 5. Publish docker image Locally :
