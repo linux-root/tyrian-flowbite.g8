@@ -1,33 +1,20 @@
 import scala.sys.process._
 import java.nio.file.Paths
 import java.nio.file.Files
+import com.w47s0n.consolebox.Consolebox
+import com.w47s0n.consolebox.*
 
 object CLIUtils {
-  private val reset = "\u001B[0m"
-  private val green = "\u001B[32m"
-  private val red   = "\u001B[31m"
-  private val yellow = "\u001B[33m"
   private val tip1  = "Tip: Change backend URL: BACKEND_BASE_URL=http://server.com sbt"
-
-  private def formatBoxContent(lines: Seq[String], color: String): String = {
-    val maxWidth = lines.map(_.length).reduceOption(_ max _).getOrElse(0) // Safe max calculation
-    val boxWidth = maxWidth + 4                                           // Padding (2 spaces on each side)
-
-    val top    = color + "╭" + "─" * (boxWidth - 2) + "╮" + reset
-    val middle = lines.map(line => color + "│ " + line.padTo(maxWidth, ' ') + " │" + reset).mkString("\n")
-    val bottom = color + "╰" + "─" * (boxWidth - 2) + "╯" + reset
-
-    (top + "\n" + middle + "\n" + bottom).stripTrailing()
-  }
 
   def boxedConfigs(configs: (String, String)*): String = {
     val formattedLines = configs.map { case (key, value) => s"\$key: \$value" }
-    formatBoxContent(formattedLines, green)
+    Consolebox.box(formattedLines.mkString("\n"))
   }
 
-  private def boxedSuccess(lines: String*): String = formatBoxContent(lines, green)
-  private def boxedError(lines: String*): String   = formatBoxContent(lines, red)
-  private def boxedWarning(lines: String*): String = formatBoxContent(lines, yellow)
+  private def boxedSuccess(lines: String*): String = Consolebox.box(lines.mkString("\n"), LogLevel.Success)
+  private def boxedError(lines: String*): String   = Consolebox.box(lines.mkString("\n"), LogLevel.Error)
+  private def boxedWarning(lines: String*): String = Consolebox.box(lines.mkString("\n"), LogLevel.Warning)
 
   private def installNpmPackages(prefix: String = ""): Unit = {
     val command        = List("npm", "install", "--prefix", prefix)
