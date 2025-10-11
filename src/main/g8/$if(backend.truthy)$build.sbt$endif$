@@ -10,8 +10,8 @@ lazy val root = (project in file("."))
 /**
  * Frontend subproject
  */
-lazy val viteDevServer = taskKey[Unit]("Start the dev server. It should be opened in a separate terminal")
-lazy val publishDist      = taskKey[Unit]("Build a static web artifact")
+lazy val devServer   = taskKey[Unit]("Start both ~fastOptJS and vite dev server concurrently")
+lazy val publishDist = taskKey[Unit]("Build a static web artifact")
 lazy val frontend = (project in file("frontend"))
   .enablePlugins(ScalaJSPlugin, DockerPlugin)
   .settings(
@@ -56,12 +56,41 @@ lazy val frontend = (project in file("frontend"))
     }
   )
   .settings(
-    viteDevServer := {
-      CLIUtils.startFrontendDevServer(scalaVersion.value, Environtments.backendBaseUrl)
+    devServer := {
+      val sourceDirs = (Compile / sourceDirectories).value
+      val watchSrcs  = (Compile / watchSources).value
+      val scalaVer   = scalaVersion.value
+      val backendUrl = Environtments.backendBaseUrl
+      val projectRef = thisProjectRef.value
+      val taskKey    = projectRef / Compile / fastOptJS
+      val sbtState   = state.value
+
+      val compilationRunner = () =>
+        try
+          Project.runTask(taskKey, sbtState) match {
+            case Some((_, Value(_))) => true  // Success
+            case Some((_, Inc(_)))   => false // Compilation failed
+            case None =>
+              println(s"[Scala.js ERROR] Task \$taskKey not found")
+              false
+          }
+        catch {
+          case e: Exception =>
+            println(s"[Scala.js ERROR] Compilation error: \${e.getMessage}")
+            false
+        }
+
+      CLIHelper.startDevEnvironment(
+        scalaVer,
+        sourceDirs,
+        compilationRunner,
+        prefix = "frontend",
+        backendUrl = Some(backendUrl)
+      )
     },
     publishDist := {
       (Compile / fullLinkJS).value
-      CLIUtils.buildFrontend(Environtments.backendBaseUrl)
+      CLIHelper.buildFrontend(prefix = "frontend", backendUrl = Some(Environtments.backendBaseUrl))
     }
   )
   .dependsOn(common.js)
