@@ -3,9 +3,9 @@ A [Giter8][g8] Frontend template project for [Tyrian Framework](https://tyrian.i
 # Scala Project Template with Tyrian, Flowbite, and ZIO
 This template sets up a Scala.js project using the Tyrian framework for UI, ZIO-HTTP for backend integration (Optional), and Flowbite for additional UI components. Tyrian is a powerful, type-safe framework for building web applications with Scala.js, Flowbite provides a rich set of Tailwind CSS components, and ZIO-HTTP offers an efficient and functional backend solution.
 
-![Tyrian Flowbite ZIO](./docs/tfz.png)
-![Tyrian Flowbite](./docs/tf.png)
-![ZIO](./docs/z.png)
+<img width="1147" height="437" alt="Screenshot 2025-10-111" src="https://github.com/user-attachments/assets/b4627630-1a57-443b-9b61-f1b3a4752812" />
+<img width="1168" height="410" alt="Screenshot 2025-10-112" src="https://github.com/user-attachments/assets/7542dd23-2b1a-4e09-a22c-fdf5520fff39" />
+<img width="1197" height="427" alt="Screenshot 2025-10-113" src="https://github.com/user-attachments/assets/482a8726-fc10-4f4f-b39d-9baec9850795" />
 
 ---
 
