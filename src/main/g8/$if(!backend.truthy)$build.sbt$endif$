@@ -1,7 +1,6 @@
 import sbt.io.Path.relativeTo
 import com.typesafe.sbt.packager.docker.{Cmd, ExecCmd}
 
-lazy val devServer   = taskKey[Unit]("Start both ~fastOptJS and vite dev server concurrently")
 lazy val publishDist = taskKey[Unit]("Build a static web artifact")
 
 lazy val root = (project in file("."))
@@ -53,12 +52,12 @@ lazy val root = (project in file("."))
     }
   ).settings(
     jsTool := JSToolConfig(
-      installPackagesCommand = ScalaJsCli.Cmd("npm install", "found\\s\\d+\\svulnerabilities".r),
+      installPackagesCommand = ScalaJsCli.Cmd("npm install", "found\\\s\\\d+\\\svulnerabilities".r),
       dev = DevConfig(
         command = ScalaJsCli.Cmd("npm run dev", "ready in".r),
         startupMessage = """|Starting development environment:
                             |Scala.js compiler: Starting in watch mode
-                            |Vite dev server: Starting...""",
+                            |Vite dev server: Starting...""".stripMargin,
         successMessage = """|Development environment ready!
                             |Web app now available on http://localhost:9876
                             |Press Ctrl+C to stop""".stripMargin
