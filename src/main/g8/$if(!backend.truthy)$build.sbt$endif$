@@ -51,38 +51,22 @@ lazy val root = (project in file("."))
       } :+ (nginxConfigFile -> "/nginx.conf")
 
     }
-  )
-  .settings(
-    devServer := {
-      val sourceDirs = (Compile / sourceDirectories).value
-      val scalaVer   = scalaVersion.value
-      val projectRef = thisProjectRef.value
-      val taskKey    = projectRef / Compile / fastOptJS
-      val sbtState   = state.value
-
-      val compilationRunner = () =>
-        try
-          Project.runTask(taskKey, sbtState) match {
-            case Some((_, Value(_))) => true  // Success
-            case Some((_, Inc(_)))   => false // Compilation failed
-            case None =>
-              println(s"[Scala.js ERROR] Task \$taskKey not found")
-              false
-          }
-        catch {
-          case e: Exception =>
-            println(s"[Scala.js ERROR] Compilation error: \${e.getMessage}")
-            false
-        }
-
-      CLIHelper.startDevEnvironment(
-        scalaVer,
-        sourceDirs,
-        compilationRunner
+  ).settings(
+    jsTool := JSToolConfig(
+      installPackagesCommand = ScalaJsCli.Cmd("npm install", "found\\s\\d+\\svulnerabilities".r),
+      dev = DevConfig(
+        command = ScalaJsCli.Cmd("npm run dev", "ready in".r),
+        startupMessage = """|Starting development environment:
+                            |Scala.js compiler: Starting in watch mode
+                            |Vite dev server: Starting...""",
+        successMessage = """|Development environment ready!
+                            |Web app now available on http://localhost:9876
+                            |Press Ctrl+C to stop""".stripMargin
+      ),
+      build = BuildConfig(
+        command = ScalaJsCli.Cmd("npm run build", ".built in.".r),
+        startupMessage = "Building production JavaScript bundle",
+        successMessage = "Web app is available at directory 'dist'"
       )
-    },
-    publishDist := {
-      (Compile / fullLinkJS).value
-      CLIHelper.buildFrontend()
-    }
+    )
   )
