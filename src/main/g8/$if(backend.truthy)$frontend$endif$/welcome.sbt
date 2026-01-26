@@ -17,7 +17,7 @@ logo :=
      |""".stripMargin
 
 usefulTasks := Seq(
-  UsefulTask("dev", "Start both ~fastOptJS and Vite dev server concurrently").alias("dev"),
+  UsefulTask("dev", "Start both ~fastOptJS and Vite dev server concurrently").alias("devServer"),
   UsefulTask("publishDist", "Build static web artifact").alias("dst"),
   UsefulTask("Docker/publishLocal", "Publish locally web app as a docker image").alias("dpl"),
   UsefulTask("Docker/publish", "Publish web app as a docker image to remote container registry").alias("dp"),
