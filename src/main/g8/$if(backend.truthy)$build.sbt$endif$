@@ -55,7 +55,7 @@ lazy val frontend = (project in file("frontend"))
   )
   .settings(
     jsTool := JSToolConfig(
-      installPackagesCommand = ScalaJsCli.Cmd("npm install --prefix frontend", "added\\s\\d+\\spackage".r),
+      installPackagesCommand = ScalaJsCli.Cmd("npm install --prefix frontend", "added\\\s\\\d+\\\spackage".r),
       dev = DevConfig(
         command = ScalaJsCli.Cmd("npm run dev --prefix frontend", "VITE.*ready".r),
         startupMessage = """|Starting development environment:
