@@ -56,8 +56,8 @@ lazy val root = (project in file("."))
       dev = DevConfig(
         command = ScalaJsCli.Cmd("npm run dev", "ready in".r),
         startupMessage = """|Starting development environment:
-                            |Scala.js compiler: Starting in watch mode
-                            |Vite dev server: Starting...""".stripMargin,
+                            | - Scala.js compiler: Starting in watch mode
+                            | - Vite dev server""".stripMargin,
         successMessage = """|Development environment ready!
                             |Web app now available on http://localhost:9876
                             |Press Ctrl+C to stop""".stripMargin

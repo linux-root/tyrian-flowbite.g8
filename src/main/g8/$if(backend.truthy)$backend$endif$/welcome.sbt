@@ -18,7 +18,7 @@ logo :=
      |""".stripMargin
 
 usefulTasks := Seq(
-  UsefulTask("reStart", "Start server in background").alias("a"),
+  UsefulTask("reStart", "Start server in background").alias("run"),
   UsefulTask("reStop", "Stop server gracefully").alias("x"),
   UsefulTask("reStatus", "Check server status"),
   UsefulTask("Docker/publishLocal", "Publish server locally  as a docker image").alias("dpl"),
