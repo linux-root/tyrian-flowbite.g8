@@ -59,8 +59,8 @@ lazy val frontend = (project in file("frontend"))
       dev = DevConfig(
         command = ScalaJsCli.Cmd("npm run dev --prefix frontend", "VITE.*ready".r),
         startupMessage = """|Starting development environment:
-                            |Scala.js compiler: Starting in watch mode...
-                            |Vite dev server: Starting...""".stripMargin,
+                            | - Scala.js compiler: Starting in watch mode
+                            | - Vite dev server: Starting""".stripMargin,
         successMessage = s"""|Development environment ready!\n Web app now available on http://localhost:9876
                              |Using backend url: \${Environtments.backendBaseUrl}
                              |Press Ctrl+C to stop""".stripMargin
