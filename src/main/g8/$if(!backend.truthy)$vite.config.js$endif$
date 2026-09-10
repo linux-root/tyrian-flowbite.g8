@@ -1,10 +1,12 @@
 import { defineConfig } from 'vite';
 import path from 'path';
+import tailwindcss from '@tailwindcss/vite';
 const scalaVersion = '$scala_version$'
 const scalaProjectName = '$name$'
 
 export default defineConfig(({ command }) => {
   return {
+    plugins: [tailwindcss()],
     resolve: {
       alias: {
         "scalajs": command == "serve" ? `./target/scala-\${scalaVersion}/\${scalaProjectName}-fastopt/main.js`: `./target/scala-\${scalaVersion}/\${scalaProjectName}-opt/main.js`,

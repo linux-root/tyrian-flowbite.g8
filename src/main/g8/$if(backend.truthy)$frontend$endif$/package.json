@@ -2,7 +2,6 @@
   "name": "tyrian-flowbite",
   "version": "0.1.0",
   "description": "Tyrian + Flowbite ^^",
-  "main": "postcss.config.js",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -11,14 +10,12 @@
   "author": "Watson",
   "license": "ISC",
   "devDependencies": {
+    "@tailwindcss/vite": "^4.3.3",
     "@vitejs/plugin-basic-ssl": "^2.0.0",
-    "autoprefixer": "^10.4.19",
-    "postcss": "^8.4.38",
-    "postcss-loader": "^8.1.1",
-    "tailwindcss": "^3.4.4",
+    "tailwindcss": "^4.3.3",
     "vite": "^6.3.5"
   },
   "dependencies": {
-    "flowbite": "^2.4.1"
+    "flowbite": "^4.0.2"
   }
 }
