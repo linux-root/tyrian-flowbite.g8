@@ -8,7 +8,7 @@ import $package$.view.components.Icons.i
 
 object BadgesView:
   def apply(): Html[Msg] =
-    div(cls := "flex flex-col mt-8")(
+    div(cls := "flex flex-col gap-4")(
       defaultBadges,
       largeBadges,
       pillBadges,
@@ -19,7 +19,7 @@ object BadgesView:
     )
 
   private def badges(spans: List[Html[Msg]]): Html[Msg] =
-    div(cls := "flex flex-row mx-auto max-w-full p-6 my-4")(
+    div(cls := "flex flex-row flex-wrap items-center gap-2 max-w-full p-4 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg")(
       spans
     )
 

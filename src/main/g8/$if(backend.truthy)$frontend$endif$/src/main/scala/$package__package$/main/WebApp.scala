@@ -13,6 +13,7 @@ import $package$.model.*
 import $package$.model.Model.User
 import $package$.util.Flowbite
 import $package$.view.MainContainer
+import $package$.view.ComponentShell
 import $package$.route.*
 import $package$.util.*
 import $package$.page.*
@@ -105,7 +106,10 @@ object WebApp extends TyrianZIOApp[Msg, Model]:
       (model, cmd)
 
   def view(model: Model): Html[Msg] =
-    val pageContent = model.currentPage.render(model)
+    val page = model.currentPage
+    val pageContent = page match
+      case Page.Home | Page.Login => page.render(model)
+      case _                      => ComponentShell(page.title, page.render(model))
     MainContainer(pageContent, model.isDarkMode, model.isLoggedIn)
 
   def subscriptions(model: Model): Sub[Task, Msg] = Sub.None

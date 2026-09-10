@@ -7,7 +7,7 @@ import $package$.model.Msg
 
 object CardsView:
   def apply(): Html[Msg] =
-    div(cls := "flex flex-col mt-8 mx-auto items-center gap-8")(
+    div(cls := "flex flex-col mx-auto items-center gap-8")(
       functionalProgrammingLink,
       userProfile,
       formInput,
@@ -342,7 +342,7 @@ object CardsView:
 
   private val functionalProgrammingTestimonials: Html[Msg] =
     div(
-      cls := "grid mb-8 border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 md:mb-12 md:grid-cols-2 bg-white dark:bg-gray-800"
+      cls := "w-full max-w-3xl grid mb-8 border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 md:mb-12 md:grid-cols-2 bg-white dark:bg-gray-800"
     )(
       figure(
         cls := "flex flex-col items-center justify-center p-8 text-center bg-white border-b border-gray-200 rounded-t-lg md:rounded-t-none md:rounded-ss-lg md:border-e dark:bg-gray-800 dark:border-gray-700"

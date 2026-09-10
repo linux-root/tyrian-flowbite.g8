@@ -1,6 +1,19 @@
 @import url("https://fonts.googleapis.com/css?family=IBM+Plex+Sans");
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
 @import "tailwindcss";
+@import "flowbite/src/themes/default"; /* Flowbite v4 semantic design tokens (rounded-base, text-body, bg-neutral-*, ...) used by JS-rendered components like the datepicker */
+
+/* Flowbite's theme also bumps the core radius scale (rounded-lg -> 16px); the
+   hand-written showcases are built against Tailwind's scale, so restore it. */
+@theme {
+  --radius-xs: 0.125rem;
+  --radius-sm: 0.25rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+  --radius-2xl: 1rem;
+  --radius-3xl: 1.5rem;
+}
 
 @plugin "flowbite/plugin";
 @source "../../../node_modules/flowbite";
@@ -11,5 +24,12 @@
   html {
     font-family: "Inter";
     font-weight: 400;
+  }
+  /* Fallback ground so overscroll never flashes white/black behind the app shell */
+  body {
+    background-color: var(--color-gray-200);
+  }
+  body:has(.dark) {
+    background-color: var(--color-gray-900);
   }
 }

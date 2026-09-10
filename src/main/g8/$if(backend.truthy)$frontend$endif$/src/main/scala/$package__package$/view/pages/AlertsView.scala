@@ -2,36 +2,35 @@ package $package$.view.pages
 
 import tyrian.Html.*
 import tyrian.Html.{attribute => attr}
-import tyrian.Html.raw
 import tyrian.Html
 import $package$.model.Msg
 import $package$.util.ElementIdGenerator
 import $package$.view.components.Icons.i
 
 object AlertsView:
+  // Tailwind can only see class names that appear verbatim in source, so each
+  // variant carries fully-spelled class strings rather than interpolated colors.
   case class AlertStyle(
-    color: String,
-    buttonTextColor: String,
-    focusRingColor: String,
-    darkTextColor: String
+    label: String,
+    container: String,
+    button: String
   )
 
   def alert(style: AlertStyle) =
-    val textContent   = "A simple info alert with an example link. Give it a click if you like."
     val _id           = ElementIdGenerator.generate("alert")
     val dismissTarget = "#" + _id
     div(
       id   := _id,
-      cls  := s"flex items-center shadow p-4 mb-4 bg-white text-\${style.color} border-t-4 border-gray-200 dark:text-\${style.darkTextColor} dark:bg-gray-700 dark:border-gray-400",
+      cls  := s"flex items-center p-4 mb-4 text-sm border rounded-lg \${style.container}",
       role := "alert"
     )(
-      i"""<svg class="flex-shrink-0 w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+      i"""<svg class="shrink-0 w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
              <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
            </svg>""",
       div(
-        cls := "ms-3 text-sm font-medium"
+        cls := "ms-3 font-medium"
       )(
-        text(textContent),
+        text(s"A simple \${style.label} alert with an "),
         a(
           href := "#",
           cls  := "font-semibold underline hover:no-underline"
@@ -40,7 +39,7 @@ object AlertsView:
       ),
       button(
         `type` := "button",
-        cls    := s"ms-auto -mx-1.5 -my-1.5 text-\${style.buttonTextColor} rounded-lg focus:ring-2 focus:ring-\${style.focusRingColor} p-1.5 hover:bg-gray-100 inline-flex items-center justify-center h-8 w-8 dark:bg-gray-700 dark:text-\${style.darkTextColor} dark:hover:bg-gray-900",
+        cls    := s"ms-auto -mx-1.5 -my-1.5 rounded-lg focus:ring-2 p-1.5 inline-flex items-center justify-center h-8 w-8 \${style.button}",
         attr("data-dismiss-target", dismissTarget),
         attr("aria-label", "Close")
       )(
@@ -51,43 +50,34 @@ object AlertsView:
       )
     )
 
-  // Define styles for alerts
   val blueStyle = AlertStyle(
-    color = "blue-800",
-    buttonTextColor = "blue-500",
-    focusRingColor = "blue-400",
-    darkTextColor = "blue-400"
+    label = "info",
+    container = "text-blue-800 border-blue-300 bg-blue-50 dark:bg-gray-800 dark:text-blue-400 dark:border-blue-800",
+    button = "bg-blue-50 text-blue-500 focus:ring-blue-400 hover:bg-blue-200 dark:bg-gray-800 dark:text-blue-400 dark:hover:bg-gray-700"
   )
 
   val redStyle = AlertStyle(
-    color = "red-800",
-    buttonTextColor = "red-500",
-    focusRingColor = "red-400",
-    darkTextColor = "red-300"
+    label = "danger",
+    container = "text-red-800 border-red-300 bg-red-50 dark:bg-gray-800 dark:text-red-400 dark:border-red-800",
+    button = "bg-red-50 text-red-500 focus:ring-red-400 hover:bg-red-200 dark:bg-gray-800 dark:text-red-400 dark:hover:bg-gray-700"
   )
 
-  // Green alert style
   val greenStyle = AlertStyle(
-    color = "green-800",
-    buttonTextColor = "green-500",
-    focusRingColor = "green-400",
-    darkTextColor = "green-300"
+    label = "success",
+    container = "text-green-800 border-green-300 bg-green-50 dark:bg-gray-800 dark:text-green-400 dark:border-green-800",
+    button = "bg-green-50 text-green-500 focus:ring-green-400 hover:bg-green-200 dark:bg-gray-800 dark:text-green-400 dark:hover:bg-gray-700"
   )
 
-  // Yellow alert style
   val yellowStyle = AlertStyle(
-    color = "yellow-800",
-    buttonTextColor = "yellow-500",
-    focusRingColor = "yellow-400",
-    darkTextColor = "yellow-300"
+    label = "warning",
+    container = "text-yellow-800 border-yellow-300 bg-yellow-50 dark:bg-gray-800 dark:text-yellow-300 dark:border-yellow-800",
+    button = "bg-yellow-50 text-yellow-500 focus:ring-yellow-400 hover:bg-yellow-200 dark:bg-gray-800 dark:text-yellow-300 dark:hover:bg-gray-700"
   )
 
-  // Gray alert style for dark theme
   val grayStyle = AlertStyle(
-    color = "gray-800",
-    buttonTextColor = "gray-500",
-    focusRingColor = "gray-400",
-    darkTextColor = "gray-300"
+    label = "dark",
+    container = "text-gray-800 border-gray-300 bg-gray-50 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600",
+    button = "bg-gray-50 text-gray-500 focus:ring-gray-400 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700"
   )
 
   val alert1 = alert(blueStyle)
@@ -96,7 +86,7 @@ object AlertsView:
   val alert4 = alert(yellowStyle)
   val alert5 = alert(grayStyle)
 
-  def apply() = div(cls := "flex flex-col space-around  max-w-full p-6")(
+  def apply() = div(cls := "flex flex-col")(
     alert1,
     alert2,
     alert3,

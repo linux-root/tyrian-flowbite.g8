@@ -1,15 +1,16 @@
 package $package$.view.pages
 
 import tyrian.Html
+import $package$.model.Msg
 import tyrian.Html.*
 import tyrian.Html.{attribute => attr}
 import $package$.view.components.Icons
-import $package$.model.Msg
 
 object AccordionView:
   def apply(): Html[Msg] =
     div(
-      id := "accordion-collapse",
+      id  := "accordion-collapse",
+      cls := "max-w-3xl rounded-xl shadow-sm overflow-hidden",
       attr("data-accordion", "open")
     )(
       // Accordion Item 1
@@ -18,16 +19,16 @@ object AccordionView:
       )(
         button(
           `type` := "button",
-          cls    := "flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-b-0 border-gray-200 rounded-t-xl focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 gap-3",
+          cls    := "flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 border border-b-0 border-gray-200 rounded-t-xl focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 gap-3",
           attr("data-accordion-target", "#accordion-collapse-body-1"),
           attr("aria-expanded", "true"),
           attr("aria-controls", "accordion-collapse-body-1")
         )(
           span("What is Flowbite?"),
           Html.raw("div")(
-            """<svg class="w-4 h-4 shrink-0 -me-0.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7.529 7.988a2.502 2.502 0 0 1 5 .191A2.441 2.441 0 0 1 10 10.582V12m-.01 3.008H10M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-      </svg>"""
+            """<svg class="w-3 h-3 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+                  </svg>"""
           )
         )
       ),
@@ -39,7 +40,7 @@ object AccordionView:
         attr("aria-labelledby", "accordion-collapse-heading-1")
       )(
         div(
-          cls := "p-5 border border-b-0 border-gray-200 dark:border-gray-700 dark:bg-gray-900"
+          cls := "p-5 bg-white dark:bg-gray-800 border border-b-0 border-gray-200 dark:border-gray-700"
         )(
           p(cls := "mb-2 text-gray-500 dark:text-gray-400")(
             "Flowbite is an open-source library of interactive components built on top of Tailwind CSS including buttons, dropdowns, modals, navbars, and more."
@@ -47,7 +48,7 @@ object AccordionView:
           p(cls := "text-gray-500 dark:text-gray-400")(
             text("Check out this guide to learn how to "),
             a(
-              href := "/docs/getting-started/introduction/",
+              href := "https://flowbite.com/docs/getting-started/introduction/",
               cls  := "text-blue-600 dark:text-blue-500 hover:underline"
             )("get started"),
             text(" and start developing websites even faster with components on top of Tailwind CSS.")
@@ -61,7 +62,7 @@ object AccordionView:
       )(
         button(
           `type` := "button",
-          cls    := "flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-b-0 border-gray-200 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 gap-3",
+          cls    := "flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 border border-b-0 border-gray-200 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 gap-3",
           attr("data-accordion-target", "#accordion-collapse-body-2"),
           attr("aria-expanded", "false"),
           attr("aria-controls", "accordion-collapse-body-2")
@@ -82,7 +83,7 @@ object AccordionView:
         attr("aria-labelledby", "accordion-collapse-heading-2")
       )(
         div(
-          cls := "p-5 border border-b-0 border-gray-200 dark:border-gray-700"
+          cls := "p-5 bg-white dark:bg-gray-800 border border-b-0 border-gray-200 dark:border-gray-700"
         )(
           p(cls := "mb-2 text-gray-500 dark:text-gray-400")(
             "Flowbite is first conceptualized and designed using the Figma software so everything you see in the library has a design equivalent in our Figma file."
@@ -104,7 +105,7 @@ object AccordionView:
       )(
         button(
           `type` := "button",
-          cls    := "flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-b-0 border-gray-200 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 gap-3",
+          cls    := "flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 border border-b-0 border-gray-200 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 gap-3",
           attr("data-accordion-target", "#accordion-collapse-body-3"),
           attr("aria-expanded", "false"),
           attr("aria-controls", "accordion-collapse-body-3")
@@ -125,7 +126,7 @@ object AccordionView:
         attr("aria-labelledby", "accordion-collapse-heading-3")
       )(
         div(
-          cls := "p-5 border border-t-0 border-gray-200 dark:border-gray-700"
+          cls := "p-5 bg-white dark:bg-gray-800 border border-t-0 border-gray-200 dark:border-gray-700"
         )(
           p(cls := "mb-2 text-gray-500 dark:text-gray-400")(
             "The main difference is that the core components from Flowbite are open source under the MIT license, whereas Tailwind UI is a paid product. Another difference is that Flowbite relies on smaller and standalone components, whereas Tailwind UI offers sections of pages."

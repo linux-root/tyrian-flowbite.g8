@@ -12,14 +12,14 @@ object DatepickerView:
 
   def apply(): Html[Msg] =
     val pickers = List(datepickerInput, inlineDatepicker, dateRangePicker).map(pickerBlock)
-    div(cls := "flex flex-col mt-8")(
+    div(cls := "flex flex-col")(
       pickers
     )
 
   private def emptyAttr(name: String): Attr[Nothing] = attribute(name, "")
 
   private def pickerBlock(picker: Html[Msg]) =
-    div(cls := "flex flex-row max-w-full p-6 my-4 bg-white dark:bg-gray-600 border border-gray-200 rounded-lg shadow")(
+    div(cls := "flex flex-row max-w-full p-6 my-4 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow")(
       picker
     )
 
@@ -45,7 +45,7 @@ object DatepickerView:
 
   private val inlineDatepicker =
     div(cls := "flex flex-col gap-4")(
-      h2(cls := "text-gray-800")("Inline datepicker"),
+      h2(cls := "text-lg font-medium text-gray-800 dark:text-gray-100")("Inline datepicker"),
       div(
         id := "datepicker-inline",
         emptyAttr("inline-datepicker"),
@@ -55,10 +55,10 @@ object DatepickerView:
 
   private val dateRangePicker =
     div(cls := "flex flex-col gap-4")(
-      h2(cls := "text-gray-800")("Date range picker"),
+      h2(cls := "text-lg font-medium text-gray-800 dark:text-gray-100")("Date range picker"),
       div(
         id  := "date-range-picker",
-        cls := "flex items-center",
+        cls := "flex items-center flex-wrap gap-y-3",
         emptyAttr("date-rangepicker")
       )(
         // Start Date Input

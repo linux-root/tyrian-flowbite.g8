@@ -16,6 +16,7 @@ import tyrian.Routing
 import $package$.model.*
 import $package$.util.Flowbite
 import $package$.view.MainContainer
+import $package$.view.ComponentShell
 import $package$.route.*
 import $package$.util.*
 import $package$.page.*
@@ -67,7 +68,10 @@ object WebApp extends $if(use_zio.truthy)$TyrianZIOApp$else$TyrianIOApp$endif$[M
       (model, PrettyLogger.error(s"Unhandled route: \$path"))
 
   def view(model: Model): Html[Msg] =
-    val pageContent = model.currentPage.render(model)
+    val page = model.currentPage
+    val pageContent =
+      if page == Page.Home then page.render(model)
+      else ComponentShell(page.title, page.render(model))
     MainContainer(pageContent, model.isDarkMode)
 
   def subscriptions(model: Model): Sub[$if(use_zio.truthy)$Task$else$IO$endif$, Msg] = Sub.None

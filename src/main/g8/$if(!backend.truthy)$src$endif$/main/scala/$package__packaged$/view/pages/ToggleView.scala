@@ -10,12 +10,12 @@ object ToggleView:
 
   def apply(): Html[Msg] =
     val toggles = List(default, checkedToggleSwitch, disabledToggleSwitches, colorfulToggleSwitches, toggleSize).map(toggleBlock)
-    div(cls := "flex flex-col mt-8")(
+    div(cls := "flex flex-col")(
       toggles
     )
 
   private def toggleBlock(toggle: Html[Msg]) =
-    div(cls := "flex flex-row max-w-full p-6 my-4 bg-white border border-gray-200 dark:bg-gray-600 rounded-lg shadow")(
+    div(cls := "flex flex-col gap-4 max-w-full p-6 my-4 bg-white border border-gray-200 dark:bg-gray-800 dark:border-gray-700 rounded-lg shadow")(
       toggle
     )
 
@@ -55,7 +55,7 @@ object ToggleView:
     )
   val disabledToggleSwitches: Html[Msg] =
     div(
-      cls := "space-y-4" // Optional: Adds spacing between the switches
+      cls := "flex flex-col items-start gap-4"
     )(
       // First toggle switch (disabled, unchekcked)
       label(
@@ -96,7 +96,7 @@ object ToggleView:
 
   val colorfulToggleSwitches: Html[Msg] =
     div(
-      cls := "space-y-4" // Optional: Adds spacing between the switches
+      cls := "flex flex-wrap gap-4"
     )(
       // Red switch
       label(
@@ -204,7 +204,7 @@ object ToggleView:
 
   val toggleSize: Html[Msg] =
     div(
-      cls := "space-y-4" // Optional spacing between switches
+      cls := "flex flex-col items-start gap-4"
     )(
       // Small toggle
       label(

@@ -2,24 +2,35 @@ package $package$.view
 
 import tyrian.Html.*
 import tyrian.Html
+import tyrian.Html.{attribute => attr}
 import $package$.model.Msg
+import $package$.page.Page
 import $package$.view.components.Icons
 import tyrian.Elem
 
 object MainContainer:
 
+  private val navLinks: List[Html[Msg]] =
+    Page.values.toList.filterNot(_ == Page.Home).map { p =>
+      a(
+        href := p.path,
+        cls  := "text-sm font-medium text-white/80 hover:text-white hover:underline"
+      )(p.title)
+    }
+
   def navbar(isDark: Boolean): Html[Msg] =
-    nav(cls := "bg-purple-600 dark:bg-purple-900 fixed w-full z-20 top-0 start-0 border-b border-gray-200 dark:border-gray-700")(
-      div(cls := "flex flex-wrap items-center justify-between p-4")(
-        a(href := "/", cls := "flex items-center")(
-          img(src := "/assets/images/tyrian-horizontal.svg", cls := "h-12")
+    nav(cls := "bg-purple-600 dark:bg-purple-950 sticky top-0 z-20 w-full border-b border-purple-700 dark:border-gray-800")(
+      div(cls := "flex flex-wrap items-center justify-between gap-x-6 gap-y-3 p-4")(
+        a(href := "/", cls := "flex items-center shrink-0")(
+          img(src := "/assets/images/tyrian-horizontal.svg", cls := "h-10", alt := "Tyrian home")
         ),
+        div(cls := "flex flex-wrap items-center gap-x-4 gap-y-1")(navLinks),
         darkModeSwitchButton(isDark)
       )
     )
 
   private val theFooter =
-    footer(cls := "w-full bg-purple-600 dark:bg-purple-900 border-t dark:border-gray-700 text-white py-4")(
+    footer(cls := "w-full bg-purple-600 dark:bg-purple-950 border-t border-purple-700 dark:border-gray-800 text-white py-4")(
       div(cls := "container mx-auto text-center")(
         p(cls := "text-sm")(
           "Created by Scala with Love © 2025. All rights reserved."
@@ -27,26 +38,30 @@ object MainContainer:
         br(),
         a(
           href := "https://github.com/linux-root/tyrian-flowbite.g8",
-          cls  := "text-blue-400 hover:underline ml-2 flex items-center justify-center space-x-1 inline-flex"
+          attr("aria-label", "GitHub repository"),
+          cls  := "text-blue-300 hover:underline ml-2 flex items-center justify-center space-x-1 inline-flex"
         )(Icons.github)
       )
     )
 
-  private def controlButton(clickMsg: Msg, child: Elem[Msg]) =
-    val dark   = "dark:text-white dark:hover:bg-purple-700 dark:focus:ring-purple-200"
+  private def controlButton(clickMsg: Msg, label: String, child: Elem[Msg]) =
+    val dark   = "dark:text-white dark:hover:bg-purple-800 dark:focus:ring-purple-200"
     val normal = "text-white hover:bg-purple-700 focus:ring-purple-100"
     button(
       onClick(clickMsg),
-      cls := s"transition-transform duration-300 ease-in-out hover:scale-105 p-4 me-2 mb-2 rounded-full focus:outline-none \$normal \$dark"
+      attr("aria-label", label),
+      cls := s"transition-transform duration-300 ease-in-out hover:scale-105 p-3 rounded-full focus:outline-none \$normal \$dark"
     )(child)
 
   private def darkModeSwitchButton(isDark: Boolean) =
     val icon = if isDark then Icons.sun else Icons.moon
-    controlButton(Msg.ToggleDarkMode, icon)
+    controlButton(Msg.ToggleDarkMode, if isDark then "Switch to light mode" else "Switch to dark mode", icon)
 
   def apply(content: Html[Msg], isDark: Boolean): Html[Msg] =
-    div(cls := (if isDark then "dark" else "not-dark-mode"))(
-      navbar(isDark),
-      main(cls := "flex flex-col min-h-screen mt-20 bg-gray-200 dark:bg-gray-900")(content),
-      theFooter
+    div(cls := (if isDark then "dark" else ""))(
+      div(cls := "flex flex-col min-h-screen bg-gray-200 dark:bg-gray-900")(
+        navbar(isDark),
+        main(cls := "flex-1 w-full")(content),
+        theFooter
+      )
     )

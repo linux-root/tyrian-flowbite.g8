@@ -4,11 +4,10 @@ import tyrian.Html.*
 import tyrian.Html.{attribute => attr}
 import tyrian.Html
 import $package$.model.Msg
-import $package$.common.BuildInfo
 
 object CardsView:
   def apply(): Html[Msg] =
-    div(cls := "flex flex-col mt-8 mx-auto items-center gap-8")(
+    div(cls := "flex flex-col mx-auto items-center gap-8")(
       functionalProgrammingLink,
       userProfile,
       formInput,
@@ -103,7 +102,7 @@ object CardsView:
           cls := "flex mt-4 md:mt-6"
         )(
           a(
-            href := BuildInfo.backendBaseUrl,
+            href := "https://www.linkedin.com/in/user777",
             cls  := "inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
           )("Add friend"),
           a(
@@ -343,7 +342,7 @@ object CardsView:
 
   private val functionalProgrammingTestimonials: Html[Msg] =
     div(
-      cls := "grid mb-8 border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 md:mb-12 md:grid-cols-2 bg-white dark:bg-gray-800"
+      cls := "w-full max-w-3xl grid mb-8 border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 md:mb-12 md:grid-cols-2 bg-white dark:bg-gray-800"
     )(
       figure(
         cls := "flex flex-col items-center justify-center p-8 text-center bg-white border-b border-gray-200 rounded-t-lg md:rounded-t-none md:rounded-ss-lg md:border-e dark:bg-gray-800 dark:border-gray-700"
