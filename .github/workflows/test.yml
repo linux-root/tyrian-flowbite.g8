@@ -1,0 +1,23 @@
+name: Test template
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: coursier/setup-action@v3
+        with:
+          jvm: temurin:17
+          apps: sbt giter8
+
+      - run: ./test.sh 3
