@@ -11,3 +11,5 @@ project/metals.sbt
 docs/.DS_Store
 .DS_Store
 test-template/
+/.agents/skills
+/.claude/skills

@@ -6,11 +6,15 @@ OUT="$PWD/test-template"
 
 command -v g8 >/dev/null || { echo "g8 not found. Install: cs install giter8"; exit 1; }
 
-echo "Which path do you want to test?"
-echo "  1) fullstack      (backend=yes)"
-echo "  2) frontend only  (backend=no)"
-echo "  3) both"
-read -rp "> " choice || choice=""   # bare `read` at EOF would exit silently under set -e
+if [ "$#" -ge 1 ]; then
+  choice="$1"   # non-interactive, e.g. for CI: ./test.sh 3
+else
+  echo "Which path do you want to test?"
+  echo "  1) fullstack      (backend=yes)"
+  echo "  2) frontend only  (backend=no)"
+  echo "  3) both"
+  read -rp "> " choice || choice=""   # bare `read` at EOF would exit silently under set -e
+fi
 case "$choice" in
   1) targets=(fullstack) ;;
   2) targets=(frontend-only) ;;
