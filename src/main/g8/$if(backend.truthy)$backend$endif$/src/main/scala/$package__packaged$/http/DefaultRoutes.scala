@@ -6,6 +6,7 @@ import $package$.common.model.LoginRequest
 import $package$.common.model.LoginSuccess
 import $package$.common.model.RandomMessage
 import $package$.common.util.JwtHelper.UserClaim
+import $package$.config.AppConfig
 import $package$.service.JWTIssuer
 import $package$.service.JWTVerifier
 import $package$.services.RandomQuotes
@@ -70,18 +71,21 @@ object DefaultRoutes {
       }
     }
 
-  private val corsMiddleWare =
+  /**
+   * Browsers reject a wildcard origin once credentials are involved, so each configured origin is echoed back
+   * verbatim. Unparseable entries are dropped rather than failing startup. The remaining CorsConfig defaults
+   * already allow any requested header (so `Authorization` works) and answer OPTIONS preflights.
+   */
+  private def corsMiddleWare(config: AppConfig) = {
+    val allowedOrigins = config.allowedOrigins.flatMap(Origin.parse(_).toOption).toSet
     cors(
       CorsConfig(
-        allowedOrigin = {
-          case origin if origin == Origin.parse("http://localhost:9876").toOption.get => // TODO: Move to  config
-            Some(AccessControlAllowOrigin.Specific(origin))
-          case _ => None
-        }
+        allowedOrigin = origin => Option.when(allowedOrigins.contains(origin))(AccessControlAllowOrigin.Specific(origin))
       )
     )
+  }
 
-  val public = Routes(
+  def public(config: AppConfig) = Routes(
     Method.GET / Root ->
       handler(
         Response.redirect(URL.decode(PathDef.ping.toString).toOption.get)
@@ -104,13 +108,13 @@ object DefaultRoutes {
       ),
     Method.POST / PathDef.login ->
       handler(parseJson >>> processLogin)
-  ) @@ corsMiddleWare
+  ) @@ corsMiddleWare(config)
 
-  val authenticated = withAuthMiddleware {
+  def authenticated(config: AppConfig) = withAuthMiddleware {
     Routes(
       Method.GET / PathDef.randomMessage -> handler(RandomQuotes.getRandomMessage.map(msg => Response.json(RandomMessage(msg).toJson))),
       Method.GET / PathDef.randomMessage2 -> handler(RandomQuotes.getRandomMessage.map(msg => Response.json(RandomMessage(msg).toJson)))
     )
-  } @@ corsMiddleWare
+  } @@ corsMiddleWare(config)
 
 }

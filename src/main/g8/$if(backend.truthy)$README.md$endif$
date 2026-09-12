@@ -16,6 +16,92 @@ To see all available commands:
 sbt
 ```
 
+## Deploying the backend with Nix
+
+The backend is packaged as a flake, so it can be built and run on NixOS without Docker.
+
+```bash
+nix build .#backend     # build it
+nix run  .#backend      # build and run it
+nix develop             # a shell with the JDK, sbt and Node
+```
+
+### First build: fill in the dependency hash
+
+`flake.nix` ships with a placeholder `depsSha256`, because the real value depends on the dependencies of
+*this* project and cannot be known by the template. The first build is therefore expected to fail:
+
+```
+error: hash mismatch in fixed-output derivation
+         specified: sha256-AAAAAAAA...
+            got:    sha256-Kx9f...
+```
+
+Copy the `got:` value into `depsSha256` in `flake.nix` and build again. Repeat this whenever you change
+dependencies, or update nixpkgs or sbt-derivation.
+
+### Configuration
+
+The backend reads its configuration from the environment. Every value has a development default, so
+`sbt backend/run` works with no setup.
+
+| Variable | Default | Notes |
+| --- | --- | --- |
+| `BACKEND_HOST` | `0.0.0.0` | Address to bind |
+| `BACKEND_PORT` | `8080` | Port to listen on |
+| `BACKEND_JWT_SECRET` | a well-known placeholder | **Must** be overridden in production; it signs session tokens |
+| `BACKEND_CORS_ORIGINS` | `http://localhost:9876` | Comma-separated origins the frontend is served from |
+
+### On NixOS
+
+The flake exports a NixOS module. Add the project as a flake input and enable the service:
+
+```nix
+{
+  inputs.myapp.url = "github:you/your-project";
+
+  # ... in your NixOS configuration:
+  imports = [ inputs.myapp.nixosModules.backend ];
+
+  services.tyrianBackend = {
+    enable = true;
+    host = "127.0.0.1";
+    port = 8080;
+    allowedOrigins = [ "https://app.example.com" ];
+    environmentFile = "/run/secrets/backend-env";   # provides BACKEND_JWT_SECRET
+  };
+}
+```
+
+The service runs under a `DynamicUser` and binds loopback by default, opening no firewall ports. Put a
+reverse proxy in front of it, or bind a VPN address, depending on how you want it reached.
+
+Deploy updates by pointing the input at a new revision (`nix flake update myapp`) and rebuilding.
+
+### Deploying frontend and backend on different domains
+
+The frontend reads its API URL from `BACKEND_BASE_URL` **at build time**, via sbt-buildinfo -- it is compiled
+into the JavaScript, not read at runtime. Setting it on the running backend does nothing. So a split-origin
+deployment needs both halves:
+
+```bash
+# when building the frontend
+BACKEND_BASE_URL=https://api.example.com sbt frontend/publishDist
+```
+
+```nix
+# on the backend, allow the origin the frontend is served from
+services.tyrianBackend.allowedOrigins = [ "https://app.example.com" ];
+```
+
+Get either one wrong and the app loads but every API call fails -- the frontend silently calling
+`http://localhost:8080`, or the browser blocking the response because the origin was not allowed. Note also
+that a page served over HTTPS cannot call a plain-HTTP backend, so the backend needs TLS termination in front
+of it.
+
+Only the backend is packaged with Nix. The frontend is a static bundle: build it with
+`sbt frontend/publishDist` and serve `frontend/dist` with any web server.
+
 ## Template license
 
 Written in 2025 by Watson Dinh <ping@w47s0n.com>

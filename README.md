@@ -42,6 +42,14 @@ Style your application with **Tailwind CSS**, a utility-first framework that ena
 ### Docker Deployment
 The project includes ready-to-use **Docker configurations** for production deployment. This ensures consistency across environments and simplifies the deployment process.
 
+### Nix Deployment (fullstack)
+The fullstack variant also ships a **`flake.nix` and a NixOS module**, so the ZIO-HTTP backend can be built
+from source and run as a hardened systemd service without Docker — useful on ARM hosts, where the Docker
+setup builds `linux/amd64` images only. Configuration (bind address, port, CORS origins, JWT secret) is read
+from the environment. See the generated project's README for details.
+
+Only the backend is packaged with Nix; the frontend remains a static bundle that any web server can serve.
+
 ### Fullstack Option
 Integrate with **ZIO-HTTP** for a complete fullstack solution, using a Scala cross-project to share source code between the frontend and backend, enabling efficient and seamless development of both components.
 

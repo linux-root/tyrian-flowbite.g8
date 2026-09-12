@@ -21,3 +21,37 @@ jobs:
           apps: sbt giter8
 
       - run: ./test.sh 3
+
+  # Catches evaluation errors in the generated flake and NixOS module -- typos, bad option types, a module
+  # that does not import. It deliberately stops short of building: that would compile Scala from source, and
+  # the template ships a placeholder depsSha256 that only the generated project can fill in.
+  nix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: cachix/install-nix-action@v31
+        with:
+          extra_nix_config: |
+            experimental-features = nix-command flakes
+
+      - uses: coursier/setup-action@v3
+        with:
+          jvm: temurin:17
+          apps: giter8
+
+      # Same snapshot trick as test.sh: g8 clones the template, so rendering straight from the checkout
+      # would miss the commit under test on a PR's detached HEAD.
+      - name: Render the fullstack variant
+        run: |
+          TPL=$(mktemp -d)
+          cp -R src "$TPL/"
+          git -C "$TPL" init -q -b main
+          git -C "$TPL" add -Af
+          git -C "$TPL" -c user.email=t@t -c user.name=t commit -qm snapshot
+          g8 "file://$TPL" --backend=yes -o rendered </dev/null
+          test -f rendered/flake.nix
+
+      - name: Check the generated flake evaluates
+        working-directory: rendered
+        run: nix flake check --no-build
