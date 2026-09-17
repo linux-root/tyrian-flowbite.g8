@@ -31,10 +31,12 @@
           version = "0.1.0";
           src = ./.;
 
-          # Trust-on-first-use: this hash cannot be known ahead of time, because it covers the dependencies of
-          # *this* project. Run `nix build .#backend`, then copy the hash Nix reports into this line.
-          # It changes whenever dependencies, nixpkgs or sbt-derivation change.
-          depsSha256 = pkgs.lib.fakeSha256;
+          # Hash of the fetched sbt dependencies. It covers external artifacts only, so it does not depend on
+          # this project's name or organization -- it is valid as generated, against the pinned flake.lock.
+          #
+          # Change a dependency in project/Dependencies.scala, or run `nix flake update`, and it goes stale.
+          # The build then fails with `hash mismatch`; copy the `got:` value it prints into this line.
+          depsSha256 = "sha256-Usvzy3bi2sRwxZbmUE4iUuY9/5WfJVp8ZaRKNu9WB2Y=";
 
           # The root project deliberately has no `.aggregate(...)`, so the default warmup of `sbt compile`
           # would resolve nothing and leave the real build to hit the network inside the sandbox, where it
