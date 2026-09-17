@@ -26,12 +26,12 @@ jobs:
       # project, so that check belongs to the example repos, which render the template and can evaluate
       # the flake in place.
 
-  # Tell the example repos a new template landed, so they sync now instead of
-  # waiting for their 06:00 UTC cron. Runs only after the tests pass.
+  # Tell the example repos a new template landed. This is their only automatic trigger -- they have no
+  # schedule of their own -- so if this job stops firing they silently serve a stale template until
+  # someone runs their workflow by hand. Runs only after the tests pass.
   #
   # Needs secret EXAMPLE_REPOS_TOKEN with Contents: read/write on both example
   # repos. GITHUB_TOKEN cannot do this: it is scoped to this repo only.
-  # Without the secret the step no-ops, so CI stays green.
   notify-examples:
     needs: test
     if: github.ref == 'refs/heads/main'
@@ -47,8 +47,9 @@ jobs:
           TOKEN: ${{ secrets.EXAMPLE_REPOS_TOKEN }}
         run: |
           if [ -z "$TOKEN" ]; then
-            echo "EXAMPLE_REPOS_TOKEN not set; ${{ matrix.repo }} will sync on its own cron."
-            exit 0
+            echo "EXAMPLE_REPOS_TOKEN is not set, so ${{ matrix.repo }} was never told to sync."
+            echo "Nothing else will trigger it: set the secret, or run its workflow by hand."
+            exit 1
           fi
           curl -fsS -X POST \
             -H "Authorization: Bearer $TOKEN" \
