@@ -66,7 +66,13 @@
             cp -r backend/target/universal/stage/lib $out/lib
             rm -f $out/bin/*.bat
 
-            wrapProgram $out/bin/backend --set JAVA_HOME ${jdk}
+            # PATH matters as much as JAVA_HOME here: the sbt-native-packager launcher shells out to `awk`
+            # to parse `java -version`, and treats a failed parse as "no java installed" rather than as a
+            # missing awk. Under systemd, where PATH is a handful of directories, that is an exit 1 with a
+            # misleading message; in an interactive shell it never shows up.
+            wrapProgram $out/bin/backend \
+              --set JAVA_HOME ${jdk} \
+              --prefix PATH : ${pkgs.lib.makeBinPath [ jdk pkgs.gawk pkgs.coreutils ]}
 
             runHook postInstall
           '';
