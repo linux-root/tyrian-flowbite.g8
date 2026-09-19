@@ -61,6 +61,18 @@ object MainContainer:
     val icon = if isDark then Icons.sun else Icons.moon
     controlButton(Msg.ToggleDarkMode, if isDark then "Switch to light mode" else "Switch to dark mode", icon)
 
+  /** Bare shell for pre-auth pages: no navbar links, no footer. */
+  def bare(content: Html[Msg], isDark: Boolean): Html[Msg] =
+    div(cls := (if isDark then "dark" else ""))(
+      div(cls := "relative flex min-h-screen flex-col items-center justify-center gap-6 bg-gray-200 px-4 py-10 dark:bg-gray-900")(
+        div(cls := "absolute top-4 right-4")(darkModeSwitchButton(isDark)),
+        a(href := "/login", cls := "flex items-center")(
+          img(src := "/assets/images/tyrian.svg", cls := "h-20", alt := "Tyrian")
+        ),
+        content
+      )
+    )
+
   def apply(content: Html[Msg], isDark: Boolean, isLoggedIn: Boolean): Html[Msg] =
     div(cls := (if isDark then "dark" else ""))(
       div(cls := "flex flex-col min-h-screen bg-gray-200 dark:bg-gray-900")(

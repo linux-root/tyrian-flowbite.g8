@@ -107,9 +107,12 @@ object WebApp extends TyrianZIOApp[Msg, Model]:
 
   def view(model: Model): Html[Msg] =
     val page = model.currentPage
-    val pageContent = page match
-      case Page.Home | Page.Login => page.render(model)
-      case _                      => ComponentShell(page.title, page.render(model))
-    MainContainer(pageContent, model.isDarkMode, model.isLoggedIn)
+    page match
+      case Page.Login =>
+        MainContainer.bare(page.render(model), model.isDarkMode)
+      case Page.Home =>
+        MainContainer(page.render(model), model.isDarkMode, model.isLoggedIn)
+      case _ =>
+        MainContainer(ComponentShell(page.title, page.render(model)), model.isDarkMode, model.isLoggedIn)
 
   def subscriptions(model: Model): Sub[Task, Msg] = Sub.None
