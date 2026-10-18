@@ -10,7 +10,7 @@ This template sets up a Scala.js project using the Tyrian framework for UI, ZIO-
 ---
 
 ## Products built using this template
-- [Crysal.art](https://crysl.art)
+- [Crysal.art](https://crysl.art.w47s0n.com)
 
 
 ## Demos
